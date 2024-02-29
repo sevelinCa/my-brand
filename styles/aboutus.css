@@ -1,0 +1,104 @@
+:root{
+    --background: #1D1B26;
+    --whiteText: #fff;
+    --mainColor: #FDA640;
+    --borderColor: #303030;
+    --grayColor: #CACACA;
+    --cardColor: #2F2D37;
+    --subText: #A09E9E;
+    --inputBack: #221F2F;
+
+}
+.main-about{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main-about .about-me{
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.main-about .about-me h1{
+    color: var(--mainColor);
+    font-size: 28px;
+}
+.main-about .about-me span{
+    color: var(--subText);
+    font-weight: 300;
+    font-size: 14px;
+}
+.my-skills{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 50px 0px;
+}
+.my-skills h1{
+    font-size: 28px;
+    color: var(--whiteText);
+}
+.my-skills .skills-one{
+    display: grid;
+    align-items: center;
+    gap: 50px;
+    grid-template-columns: repeat(auto-fill, minmax(100px,2fr));
+    width: 100%;
+
+}
+
+.my-skills .skills-one .skill{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--cardColor);
+}
+.mission-conatiner{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+}
+.mission-conatiner .my{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 14px;
+}
+.mission-conatiner .my h4{
+    color: var(--mainColor);
+    font-size: 20px;
+}
+.mission-conatiner .my span{
+    color: var(--subText);
+    font-weight: 300;
+    font-size: 14px;
+}
+.mission-conatiner .my-vision{
+    background: var(--cardColor);
+   
+}
+.my-journey{
+    padding: 40px 0px;
+}
+
+
+.my-journey .my{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 14px;
+    max-width: 400px;
+}
+.my-journey .my h4{
+    color: var(--mainColor);
+    font-size: 20px;
+}
+.my-journey .my span{
+    color: var(--whiteText);
+    font-weight: 300;
+    font-size: 14px;
+}
