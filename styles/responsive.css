@@ -1,0 +1,163 @@
+@media(max-width: 1024px) {
+    nav ul{
+        display: none;
+    }
+    nav .toggle{
+        display: block;
+    }
+    .hero-section{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+
+    }
+    .hero-section .hero-content{
+        width: 100%;
+        align-items: center;
+   
+    }
+    .hero-content h1,h2{
+        text-align: center;
+    }
+    .hero-content span{
+        text-align: center;
+    }
+    .hero-profile{
+        padding-left: 0px;
+    }
+    .main-signin .signin-header{
+   
+        width: 50%;
+    }
+    .main-signin form {
+        width: 40%;
+       
+    }
+  
+}
+
+
+
+@media screen and (max-width:768px) {
+    .contact-us .contact-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .contact-us{
+        align-items: center;
+    }
+    .contact-us .contact-info{
+        width: 100%;
+        align-items: center;
+    }
+    .contact-us .contact-info .info{
+        align-items: center;
+    }
+    .contact-us .contact-form{
+        width: 100%;
+    }
+    .contact-us .contact-form form input{
+        width: 100%;
+    }
+    .contact-us .contact-form form textarea{
+        width: 100%;
+    }
+    .main-signin .signin-header{
+   
+        width: 80%;
+    }
+    .main-signin form {
+        width: 80%;
+       
+    }
+    .portfolio .projects {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media(max-width: 640px) {
+    .container{
+      
+     
+        padding: 20px 20px;
+    }
+    .hero-content .buttons{
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+    }
+    .hero-content h1{
+        text-align: center;
+        font-size: 20px;
+    }
+    .hero-content h2{
+        text-align: center;
+        font-size: 16px;
+    }
+    .hero-content span{
+        font-size: 14px;
+    }
+    .experiences{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .experiences .card-ex:nth-child(2){
+        border-right: none;
+
+    }
+    .experiences .card-ex:nth-child(3),.card-ex:nth-child(4){
+        border-top: 1px solid var(--mainColor);
+    }
+    .choose-me-section{
+        align-items: center;
+    }
+    .insight-card{
+        max-width: 300px;
+     
+    }
+    .insights-main{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+        gap: 40px;
+    }
+    footer .footer-container{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 50px;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-container .subscribe{
+        align-items: center;
+    }
+    .main-signin{
+        padding-top: 100px;
+    }
+
+    .main-signin .signin-header{
+   
+        width: 90%;
+       
+    }
+    .main-signin .signin-header h1{
+        font-size: 24px;
+    }
+    .main-signin form {
+        width: 90%;
+       
+    }
+    .my-skills .skills-one{
+        display: grid;
+        align-items: center;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(20px,1fr));
+        width: 100%;
+    
+    }
+    .mission-conatiner{
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+    }
+ 
+    
+}
