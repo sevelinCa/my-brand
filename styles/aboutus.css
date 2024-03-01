@@ -54,6 +54,10 @@
     height: 80px;
     border-radius: 50%;
     background: var(--cardColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
 .mission-conatiner{
     display: grid;

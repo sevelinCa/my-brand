@@ -194,6 +194,9 @@ main{
     height: 60px;
     border-radius: 50%;
     background: var(--subText);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .choose-me .card-choose h1{
@@ -222,7 +225,7 @@ main{
     font-size: 20px;
 }
 .testimonials-section .test-card{
-    width: 500px;
+
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -252,9 +255,24 @@ main{
     font-weight: 300;
 }
 .testimonials-cards{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 40px;
+}
+.testimonials-section .buttons{
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 20px;
+    margin-left: auto;
+
+}
+.testimonials-section .buttons .butt{
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+    
+}
+.testimonials-section .buttons .butt:hover{
+    transform: scale(1.1);
 }
 .insights{
     display: flex;
@@ -267,7 +285,7 @@ main{
     display: flex;
     flex-direction: column;
     background: var(--cardColor);
-    max-width: 300px;
+    
     border-radius: 8px;
     gap: 10px;
 }
@@ -533,12 +551,18 @@ footer  .copy{
     color: var(--grayColor);
     font-weight: 300;
 }
+
 .main-signin form .contain input{
     padding: 14px;
     border-radius: 16px;
     border: none;
     background: var(--inputBack);
     width: 100%;
+    color: var(--whiteText);
+}
+
+.main-signin form .contain input:focus{
+    outline: none;
 }
 .main-signin form .forgot{
     margin-left: auto;
@@ -553,6 +577,7 @@ footer  .copy{
     color: white;
     border-radius: 16px;
     width: 100%;
+    cursor: pointer;
 }
 .main-signin form p{
     color: var(--whiteText);
