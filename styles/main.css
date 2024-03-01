@@ -212,6 +212,7 @@ main{
 
 .choose-me .card-choose h1{
     font-size: 20px;
+    text-align: center;
     color: var(--mainColor);
 }
 .choose-me .card-choose span{
