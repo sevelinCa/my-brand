@@ -6,6 +6,9 @@
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;  
 }
+html{
+    scroll-behavior: smooth;
+}
 
 :root{
     --background: #1D1B26;
@@ -115,10 +118,18 @@ main{
     margin-top: 20px;
     border-radius: 12px;
     font-weight: 200;
+    transition:0.4s ease-in-out ;
+}
+.hero-content .buttons a:hover{
+    background-color: var(--mainColor);
+    color: white;
 }
 .hero-content .buttons .get-in{
     background: #FDA640;
     border: none;
+}
+.hero-content .buttons .get-in:hover{
+    opacity: 50%;
 }
 .hero-profile{
     padding-left: 100px;
