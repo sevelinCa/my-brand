@@ -9,35 +9,43 @@
 </head>
 <body>
     <div class="container">
-        <nav>
-            <a href="./">
-              <h1 class="logo">MY_<span>BRAND</span></h1>
-            </a>
-            <ul>
-              <li><a href="./">Home</a></li>
-              <li><a href="contactus.html">Contact Us</a></li>
-              <li><a href="aboutus.html">About Us</a></li>
-              <li><a href="portfolio.html">Portfolio</a></li>
-             
-            </ul>
-            <div class="toggle">
-              <svg
-                width="26"
-                height="24"
-                viewBox="0 0 26 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.52478 1H25M1.52478 12H25M1.52478 23H25"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-          </nav>
+      <nav>
+        <a href="./">
+          <h1 class="logo">MY_<span>BRAND</span></h1>
+        </a>
+        <ul id="navbar" class="links">
+          <li><a href="./">Home</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+         
+        </ul>
+        <ul id="navbarphone" class="linksphone">
+          <li><a href="./">Home</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+         
+        </ul>
+
+        <div id="toggle" class="toggle">
+          <svg
+            width="26"
+            height="24"
+            viewBox="0 0 26 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.52478 1H25M1.52478 12H25M1.52478 23H25"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </nav>
 
         <main>
             <div class="contact-us">
@@ -98,5 +106,6 @@
         </div>
         <span class="copy">© 2024 My_Brand. All rights reserved.</span>
       </footer>
+      <script src="./main.js"></script>
 </body>
 </html>

@@ -1,7 +1,55 @@
 @media(max-width: 1024px) {
-    nav ul{
+    nav .links{
         display: none;
+        opacity: 0;
+        transition: 0.5s ease-in;
     }
+    nav .linksphone{
+        display: flex;
+        flex-direction: column;
+   
+        position: fixed;
+        background: linear-gradient(160deg,#221c3c, #1D1B26);
+        top: 70px;
+        width: 100%;
+        left: 0px;
+        height: 0px;
+        gap: 20px;
+        list-style: none;
+        overflow: hidden;
+        transition: 0.4s ease-in-out;
+        
+    }
+    nav .linksphone a{
+        font-size: 20px;
+        text-decoration: none;
+        color: white;
+
+    }
+    nav .linksphone.active a{
+        text-decoration: none;
+        font-size: 20px;
+    }
+ 
+    nav .linksphone.active{
+        flex-direction: column;
+        padding: 20px 50px;
+        position: fixed;
+        background: linear-gradient(160deg,#221c3c, #1D1B26);
+        top: 70px;
+        width: 100%;
+        left: 0px;
+        height: 100%;
+        gap: 20px;
+        list-style: none;
+    }
+  
+  
+    nav .active  a{
+        color:white;
+        font-size: 16px;
+    }
+
     nav .toggle{
         display: block;
     }

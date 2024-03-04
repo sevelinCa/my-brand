@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Rubik", sans-serif;
-    font-optical-sizing: auto;  
+
 }
 html{
     scroll-behavior: smooth;
@@ -35,8 +35,19 @@ html{
     justify-content: space-between;
     align-items: center;
     border-bottom:2px solid var(--borderColor);
-    padding-bottom: 20px;
+    padding: 20px 50px;
+    position: fixed;
+    width: 100%;
+    background: var(--background);
+    top: 0;
+    left: 0;
+  
+    
 }
+nav a{
+    text-decoration: none;
+}
+
 nav .logo{
     font-size: 24px;
     color: var(--whiteText);
@@ -45,19 +56,22 @@ nav .logo{
 nav .logo span{
     color: var(--mainColor);
 }
- nav ul{
+ nav .links{
     display: flex;
     flex-direction: row;
     gap: 42px;
     list-style: none;
 }
-nav a{
+nav .linksphone{
+    display: none;
+}
+nav .links a{
     color: var(--whiteText);
     text-decoration: none;
     font-size: 14px;
     transition: 0.4s ease-in-out;
 }
-nav a:hover{
+nav .links a:hover{
     color: var(--mainColor);
 }
 nav .toggle{
@@ -67,7 +81,7 @@ main{
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-top: 40px;
+    padding-top: 120px;
 }
 .hero-section{
     display: flex;
