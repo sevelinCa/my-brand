@@ -1,0 +1,925 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+    
+}
+:root{
+    --background: #1D1B26;
+    --whiteText: #fff;
+    --mainColor: #FDA640;
+    --borderColor: #303030;
+    --grayColor: #CACACA;
+    --cardColor: #2F2D37;
+    --subText: #A09E9E;
+    --inputBack: #221F2F;
+    --subBack: #2B2835;
+
+}
+body{
+    background-color: var(--background);
+}
+.logo{
+    font-size: 24px;
+    color: var(--whiteText);
+    font: 800;
+}
+.logo span{
+    color: var(--mainColor);
+}
+a{
+    text-decoration: none;
+}
+
+
+/* home page css */
+nav{
+    padding: 20px 100px;
+    background-color: var(--subBack);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+nav .top-nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+nav .logo h2{
+    color: white;
+    font-size: 20px;
+}
+nav .logo h2 span{
+    color: #FDA640;
+}
+
+nav .left-nav{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+nav .left-nav .links{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+nav .left-nav .links a{
+    color: white;
+    transition: 0.4s ease-in-out;
+    text-decoration: none;
+}
+nav .notification{
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    background: rgb(82, 82, 82);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+nav .notification .noti{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--mainColor);
+    border-radius: 50%;
+    top: 6px;
+    left: 20px;
+}
+nav .bottom_nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 20px;
+}
+nav .bottom_nav span{
+    font-size: 14px;
+    color: var(--subText);
+    font-weight: 300;
+
+}
+nav .bottom_nav .hello{
+    font-size: 20px;
+    color: var(--whiteText);
+}
+nav .top-right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+
+}
+nav .top-right .profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: gray;
+    cursor: pointer;
+}
+nav .top-right .profile img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+nav .top-right .setting-modal{
+    background: white;
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 1px;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    color: black;
+
+}
+nav .top-right .setting-modal.active{
+    display: flex;
+}
+nav .top-right .setting-modal a{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    color: black;
+    align-items: center;
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+    padding: 20px 100px;
+}
+main .articles{
+    flex: 2;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+main .articles .artcles-head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+main .articles .artcles-head span{
+    font-size: 18px;
+    color: white;
+    font-weight: 4s00;
+}
+main .articles .artcles-head a{
+    text-decoration: none;
+    color: var(--mainColor);
+    font-weight: 100;
+    font-size: 14px;
+}
+
+.queries{
+    flex: 1;
+    padding: 10px;
+    height: 40vh;
+}
+.queries-head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.queries-head span{
+    font-size: 18px;
+    color: white;
+    font-weight: 4s00;
+}
+.queries-head a{
+    text-decoration: none;
+    color: var(--mainColor);
+    font-weight: 100;
+    font-size: 14px;
+}
+.queries-main{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0px;
+
+}
+.queries-main .query{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background-color: var(--subBack);
+    padding: 10px;
+}
+.query .query-up{
+    display: flex;
+    flex-direction: column;
+}
+.query .query-up h2{
+    font-size: 16px;
+    font-weight: 500;
+}
+.query .query-up span{
+    font-size: 14px;
+    color: white;
+}
+.query span{
+    font-size: 12px;
+    color: var(--subText);
+    font-weight: 300;
+}
+
+.new-aritcle{
+    padding: 15px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #FDA640;
+    text-decoration: none;
+    margin-left: auto;
+}
+
+.insight-card{
+    display: flex;
+    flex-direction: column;
+    background: var(--cardColor);
+    border-radius: 8px;
+    gap: 0px;
+}
+.insight-card h2{
+    font-size: 14px;
+    color: white;
+}
+.insight-card span{
+    color: var(--subText);
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.insight-card .picture{
+    height: 150px;
+   
+}
+.insight-card .picture img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.insight-card .operation{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+.insight-card .operation .like{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    padding: 0px 0px;
+    cursor: pointer;
+}
+.insight-card .content{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.insights-header span{
+    color: var(--subText);
+    font-weight: 300;
+    overflow: hidden;
+}
+.insights-main{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: 10px;
+}
+
+
+
+
+
+
+/* sign in page css */
+.login{
+ 
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+    min-height: 100vh;
+    gap: 40px;
+   
+}
+
+.main-signin{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.main-signin .signin-header{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    padding: 20px 50px;
+    border-radius: 24px;
+    background: var(--inputBack);
+    width: 35%;
+}
+.main-signin .signin-header h1{
+    font-size: 28px;
+    color: var(--mainColor);
+}
+.main-signin .signin-header span{
+    color: var(--grayColor);
+    font-weight: 300;
+    font-size: 14px;
+}
+.main-signin form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 25%;
+    align-items: center;
+
+}
+.main-signin form .contain{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+.main-signin form .contain span{
+    color: var(--grayColor);
+    font-weight: 300;
+}
+
+.main-signin form .contain input{
+    padding: 14px;
+    border-radius: 16px;
+    border: none;
+    background: var(--inputBack);
+    width: 100%;
+    color: var(--whiteText);
+}
+
+.main-signin form .contain input:focus{
+    outline: none;
+}
+.main-signin form .forgot{
+    margin-left: auto;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--mainColor);
+}
+.main-signin form button{
+    padding: 14px;
+    border: none;
+    background: var(--mainColor);
+    color: white;
+    border-radius: 16px;
+    width: 100%;
+    cursor: pointer;
+}
+.main-signin form .btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: var(--mainColor);
+    color: var(--whiteText);
+    width: 100%;
+    border-radius: 16px;
+}
+
+.main-signin form p{
+    color: var(--whiteText);
+    font-size: 14px;
+    font-weight: 300;
+}
+.main-signin form p a{
+    color: var(--mainColor);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+
+/* aritcles pages */
+.all-aritcles{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 100px;
+}
+.all-aritcles h1{
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+}
+.all-aritcles .all-articles-card{
+    display: grid;
+    gap: 50px;
+    grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+}
+
+
+/* new aritle  */
+.new-aritcle-container{
+    padding: 40px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.new-aritcle-container h1{
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+}
+.new-form{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    gap: 20px;
+}
+.new-form .input-contain{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+}
+.new-form .input-contain span{
+    color: var(--whiteText);
+}
+.new-form .input-contain input{
+    padding: 10px;
+    width: 100%;
+    background: transparent;
+    border: 1px  solid var(--subText);
+    border-radius: 6px;
+}
+.new-form .input-contain textarea{
+    padding: 10px;
+    width: 100%;
+    background: transparent;
+    border: 1px  solid var(--subText);
+    border-radius: 6px;
+    height: 14vh;
+
+}
+.new-form button{
+    width: 100px;
+    height: 40px;
+    margin-top: auto;
+    border: none;
+    background-color: var(--mainColor);
+    color: var(--whiteText);
+}
+.aritcles-head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* single blog page */
+.single-container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 10px 200px;
+}
+.single-container .img-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 60%;
+   
+   
+}
+
+.single-container .img-content .image{
+    width: 100%;
+    height: 30vh;
+}
+.single-container .img-content .image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.single-container .img-content .content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background-color: var(--subBack);
+}
+.single-container .img-content .content h1{
+    font-size: 20px;
+    color: white;
+}
+.single-container .img-content .content span{
+    font-size: 14px;
+    color: var(--subText);
+}
+.single-container .img-content .likes{
+    background-color: var(--subBack);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.single-container .comment-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 40%;
+  
+    background-color: var(--subBack);
+    padding: 20px;
+    overflow-y: scroll;
+    height: 75vh;
+ 
+}
+.single-container .comment-content::-webkit-scrollbar{
+    width: 2px;
+    background: var(--subText);
+}
+.single-container .comment-content::-webkit-scrollbar-thumb{
+    width: 2px;
+    background: var(--mainColor);
+}
+.single-container .comment{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.single-container .person-comment{
+    padding: 10px 0px;
+    border-bottom: 1px solid var(--subText);
+}
+.single-container .comment-content h1{
+    font-size: 16px;
+    color: var(--whiteText);
+    font-weight: 300;
+}
+.single-container .comment-content .person-header{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}.single-container .comment-content .person-header span{
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+}
+.single-container .comment-content span{
+    color: var(--subText);
+    font-size: 12px;
+}
+.single-container .profile{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background:  var(--subText);
+}
+
+
+/* messages page */
+.main-message{
+    padding: 30px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main-message h1{
+    color: var(--whiteText);
+    font-size: 24px;
+    font-weight: 500;
+}
+.message-conatiner{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 40px;
+}
+.message-card{
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--subBack);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.message-card .message-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.message-card .message-top .delete{
+    cursor: pointer;
+}
+.message-card .mesasage-head{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+.message-card .mesasage-head .profile{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: gray;
+}
+.message-card .mesasage-head .sender-info{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.message-card .mesasage-head .sender-info h2{
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+}
+.message-card .mesasage-head .sender-info span{
+    color: var(--subText);
+    font-weight: 200;
+    font-size: 14px;
+}
+.message-card .message-body span{
+    color: var(--whiteText);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+
+.main-setting{
+    padding: 20px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main-setting .admin-info{
+    padding: 10px 20px;
+    background: var(--subBack);
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    border-radius: 12px;
+
+}
+.main-setting .admin-info .info-part{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.main-setting .admin-info .admin-profile{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.main-setting .admin-info .admin-profile img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.main-setting .admin-info .admin-names{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.main-setting .admin-info .admin-names h1{
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+.main-setting .admin-info .admin-names span{
+    padding: 4px 10px;
+    background: var(--mainColor);
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+}
+.main-setting .admin-info .info span{
+    color: var(--whiteText);
+    font-weight: 300;
+}
+.main-setting .admin-info .info p{
+    color: var(--subText);
+    font-weight: 300;
+    font-size: 14px;
+}
+.main-setting .setting-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.main-setting .setting-form h1{
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    
+}
+.main-setting .setting-form .form-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    align-items: end;
+    gap: 20px;
+    
+
+    width: 100%;
+  
+}
+.main-setting .setting-form .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: var(--subBack);
+    
+    padding: 20px;
+
+}
+.main-setting .setting-form .form .input-contain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+.main-setting .setting-form .form .input-contain span{
+    color: white;
+    font-size: 18px;
+    font-weight: 300;
+}
+.main-setting .setting-form .form .input-contain input{
+    padding: 14px;
+    background: transparent;
+    border: 1px solid var(--whiteText);
+    color: white;
+    font-weight: 400;
+    border-radius: 4px;
+}
+.main-setting .setting-form .form .input-contain .profile{
+    width: 60px;
+    height: 60px;
+    background: gray;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+.main-setting .setting-form .form .input-contain .profile img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.main-setting .setting-form .form .input-contain .profile .delete{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.main-setting .setting-form .form button{
+    padding: 14px;
+    border: none;
+    background: var(--mainColor);
+    color: var(--whiteText);
+}
+
+/* update modal */
+
+.update-modal{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.589);
+    top: 0;
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.update-modal.active{
+    display: flex;
+}
+.update-modal .modal-form{
+    width: 60%;
+    background: var(--subBack);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.update-modal .modal-form h1{
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+
+}
+.update-modal .modal-form form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    color: var(--whiteText);
+}
+.update-modal .modal-form .form{
+    width: 100%;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+.update-modal .modal-form .form .contain{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+.update-modal .modal-form .form .contain input{
+    padding: 14px;
+    background: transparent;
+    border: 1px solid var(--whiteText);
+    border-radius: 12px;
+    color: white;
+
+ 
+}
+.update-modal .modal-form form button{
+    padding: 14px;
+    border: none;
+    background: var(--mainColor);
+    color: white;
+    width: 200px;
+    cursor: pointer;
+    transition: 0.4S ease-in-out;
+    
+}
+.update-modal .modal-form form button:hover{
+
+    transform: scale(1.1);
+}
+
+.notification-container{
+    position: absolute;
+    padding: 10px;
+    background: var(--whiteText);
+    top: 50px;
+    right: 6px;
+    width: 300px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+.notification-container.active{
+    display: flex;
+}
+.notification-container h1{
+    font-size: 18px;
+    font-weight: 500;
+
+}
+.notification-container .notifi{
+   
+     border-radius: 12px;
+     font-size: 14px;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+}
+.notification-container .notifi .notifi-contain{
+    padding: 10px;
+    background-color: rgb(88, 95, 92);
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    color: var(--whiteText);
+
+
+}
+.notification-container .notifi .notifi-contain h2{
+    font-size: 14px;color:  black;
+}
