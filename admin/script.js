@@ -55,7 +55,7 @@ function openNotifi(){
 
 }
 window.addEventListener('click', (e)=>{
-  if(e.target.classList.contains('Admin ')){
+  if(e.target.classList.contains('Admin')){
      window.alert('ello')
   }
 })

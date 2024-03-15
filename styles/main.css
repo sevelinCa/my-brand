@@ -615,3 +615,129 @@ footer  .copy{
     font-weight: 500;
     text-decoration: none;
 }
+
+
+/* opened blog */
+.single-container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 60px 0px;
+
+}
+.single-container .img-content{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.single-container .content{
+    display: flex;
+    flex-direction: column;
+    background: var(--inputBack);
+    gap: 10px;
+    padding: 20px;
+}
+.single-container .content .likes{
+    display: flex;
+    gap: 20px;
+}
+.single-container .content h1{
+    color: white;
+    font-size: 24px;
+}
+.single-container .content span{
+    color: var(--subText);
+}
+.single-container .image{
+    width: 100%;
+    gap: 20px;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+ 
+}
+.single-container .image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.comment-content{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: var(--inputBack);
+    width: 400px;
+   
+    
+
+} 
+.comment-content h1{
+    font-size: 24px;
+}
+.comment-content .input-content{
+   bottom: 20px;
+    padding: 10px 0px;
+    position: absolute;
+    display: flex;
+    width: 400px;
+}
+.comment-content .input-content input{
+    width: 80%;
+    padding: 10px;
+}
+.comment-content .input-content button{
+    padding: 10px 4px;
+    background: #FDA640;
+    border: none;
+    color: white;
+}
+.comment-content .person-comment{
+    display: flex;
+    flex-direction: column;
+    background: rgb(25, 25, 43);
+    padding: 10px;
+}
+.comment-content  h1{
+    color: white;
+}
+.comment-content  .person-comment .person-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+.comment-content  .person-comment .person-header span{
+    color: black;
+}
+.comment-content  .person-comment span{
+    color: var(--subText);
+    font-size: 14px;
+}
+.comment-content .person-comment .profile{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+   
+    background: #a0a0a0;
+}
+.comment-content .comment{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 70vh;
+    overflow: scroll;
+    position: relative;
+    padding: 0px 10px;
+  
+   
+}
+.comment-content .comment::-webkit-scrollbar{
+    width: 2px;
+    background-color: gray;
+}
+.comment-content .comment::-webkit-scrollbar-thumb{
+    background: var(--mainColor);
+}
