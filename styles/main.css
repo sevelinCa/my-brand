@@ -311,7 +311,6 @@ main{
     display: flex;
     flex-direction: column;
     background: var(--cardColor);
-    
     border-radius: 8px;
     gap: 10px;
 }
@@ -341,6 +340,15 @@ main{
     flex-direction: row;
     align-items: center;
     gap: 20px;
+    bottom: 0;
+}
+.insight-card .ope{
+    position: relative;
+    height: 40px;
+}
+.insight-card .operation{
+    position: absolute;
+    z-index: 10;
 }
 .insight-card .operation .like{
     display: flex;
@@ -350,10 +358,15 @@ main{
     padding: 10px 0px;
     cursor: pointer;
 }
+a{
+    text-decoration: none;
+}
 .insight-card .content{
     padding: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+ 
     gap: 10px;
 }
 .insights-header{
@@ -596,6 +609,7 @@ footer  .copy{
     text-decoration: none;
     color: var(--mainColor);
 }
+
 .main-signin form button{
     padding: 14px;
     border: none;
@@ -626,7 +640,7 @@ footer  .copy{
 
 }
 .single-container .img-content{
-    width: 50%;
+    width: 65%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -638,8 +652,9 @@ footer  .copy{
     gap: 10px;
     padding: 20px;
 }
-.single-container .content .likes{
+.single-container  .likes{
     display: flex;
+   
     gap: 20px;
 }
 .single-container .content h1{
@@ -663,54 +678,88 @@ footer  .copy{
     object-fit: cover;
 }
 .comment-content{
-    width: 50%;
+   width: 500px;
+    
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 10px;
     background: var(--inputBack);
     width: 400px;
-   
+    position: fixed;
+    right: 5vh;
     
 
 } 
+.timeBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
 .comment-content h1{
-    font-size: 24px;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0px 10px;
 }
 .comment-content .input-content{
    bottom: 20px;
     padding: 10px 0px;
-    position: absolute;
     display: flex;
+    flex-direction: column;
     width: 400px;
+    gap: 5px;
 }
 .comment-content .input-content input{
-    width: 80%;
+    
     padding: 10px;
+    width: 52%;
+}
+.comment-content .input-content #name{
+    width: 150px;
 }
 .comment-content .input-content button{
     padding: 10px 4px;
     background: #FDA640;
     border: none;
     color: white;
+    width: 90%;
 }
 .comment-content .person-comment{
     display: flex;
     flex-direction: column;
     background: rgb(25, 25, 43);
-    padding: 10px;
+    padding: 20px;
+    gap: 10px;
+
 }
 .comment-content  h1{
     color: white;
 }
-.comment-content  .person-comment .person-header{
+.comment-content .person-comment .profile-name{
     display: flex;
     align-items: center;
+    gap: 10px;
+   
+}
+.comment-content .person-comment .profile-name span{ 
+    font-size: 12px;
+    color: white;
+
+}
+.comment-content  .person-comment .person-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
     
 }
 .comment-content  .person-comment .person-header span{
-    color: black;
+    color: white;
+}
+.single-container .comment-content .person-header .timeBlock span{
+    color: var(--mainColor);
+    font-size: 10px;
 }
 .comment-content  .person-comment span{
     color: var(--subText);
@@ -723,12 +772,21 @@ footer  .copy{
    
     background: #a0a0a0;
 }
+.headWord span{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3; 
+    
+   
+}
 .comment-content .comment{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 70vh;
-    overflow: scroll;
+    height: 50vh;
+    overflow-y: scroll;
     position: relative;
     padding: 0px 10px;
   

@@ -279,11 +279,18 @@ main .articles .artcles-head a{
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
+.operation .ope{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  
+}
 .insight-card .operation{
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 20px;
+  
 }
 .insight-card .operation .like{
     display: flex;
@@ -373,7 +380,10 @@ main .articles .artcles-head a{
     color: var(--grayColor);
     font-weight: 300;
 }
-
+.main-signin form .contain input.error{
+    border: 2px solid rgb(253, 88, 88);
+    animation: shake 0.4s ease-in-out;
+}
 .main-signin form .contain input{
     padding: 14px;
     border-radius: 16px;
@@ -382,6 +392,17 @@ main .articles .artcles-head a{
     width: 100%;
     color: var(--whiteText);
 }
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}
+
+/* Apply the animation to the input element */
+
+
 
 .main-signin form .contain input:focus{
     outline: none;
@@ -560,6 +581,16 @@ main .articles .artcles-head a{
     height: 75vh;
  
 }
+.headWord span{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3; 
+    
+   
+}
+
 .single-container .comment-content::-webkit-scrollbar{
     width: 2px;
     background: var(--subText);
@@ -832,6 +863,9 @@ main .articles .artcles-head a{
     flex-direction: column;
     gap: 10px;
 
+}
+.update-modal .modal-form textarea{
+    width: 100%;
 }
 .update-modal .modal-form h1{
     font-weight: 600;

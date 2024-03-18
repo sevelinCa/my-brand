@@ -18,24 +18,26 @@
                 <h1>Welcome Again</h1>
                 <span>Fill in your credentials</span>
             </div>
-            <form>
+            <form id="formLogin">
+                <span style="font-size: 12px;color: rgb(253, 38, 38);padding: 0px 10px ;text-align: center;" class="errorMessage"></span>
                 <div class="contain">
                     <span>Email</span>
-                    <input type="text" placeholder="Enter your email">
+                    <input type="text" id="email" placeholder="Enter your email">
                 </div>
                 <div class="contain">
-                    <span>Email</span>
-                    <input type="text" placeholder="Enter your email">
+                    <span>Password</span>
+                    <input type="password" id="password" placeholder="Enter your email">
                 </div>
                 <a href="#" class="forgot">forgot password?</a>
-                <a href="index.html" class="btn">
+                <button type="submit" class="btn">
                     login
-                </a>
+                </button>
                 
             </form>
         </main>
       
 
     </div>
+    <script src="./auth.js"></script>
 </body>
 </html>

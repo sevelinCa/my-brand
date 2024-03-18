@@ -69,17 +69,17 @@
                     </div>
                   </div>
                   <div class="contact-form">
-                    <form action="">
-                      <input type="text" placeholder="Your Name" />
-                      <input type="text" placeholder="Your Email" />
+                    <form id="messageForm" action="">
+                      <input id="username" type="text" placeholder="Your Name" />
+                      <input id="useremail" type="text" placeholder="Your Email" />
                       <textarea
-                        name=""
+                        name="message"
                         placeholder="Your Message"
-                        id=""
+                        id="messages"
                         cols="30"
                         rows="4"
                       ></textarea>
-                      <button>Submit</button>
+                      <button type="submit">Submit</button>
                     </form>
                   </div>
                 </div>
@@ -109,6 +109,34 @@
         </div>
         <span class="copy">© 2024 My_Brand. All rights reserved.</span>
       </footer>
+
+      <script>
+        const messageForm = document.querySelector('#messageForm');
+        const username = document.querySelector('#username')
+        const useremail = document.querySelector('#useremail')
+        const message = document.querySelector('#messages')
+
+        messageForm.addEventListener('submit', (e)=>{
+          e.preventDefault()
+          if(username !== "" && useremail !== "" && message !==""){
+            const currentMessage = JSON.parse(localStorage.getItem('message')) || []
+            currentMessage.push({
+              id: currentMessage.length+1,
+              username: username.value,
+              email: useremail.value,
+              
+
+            })
+            localStorage.setItem('message', JSON.stringify(currentMessage))
+            alert('message added');
+            window.location.reload()
+
+          }else{
+            alert('All field are required')
+          }
+
+        })
+      </script>
       <script src="./main.js"></script>
 </body>
 </html>
