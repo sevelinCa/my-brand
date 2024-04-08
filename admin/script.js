@@ -41,51 +41,74 @@ window.addEventListener("click", (e) => {
 });
 
 let idUp = null
+const token = JSON.parse(localStorage.getItem("token"))
 
-function updateModal(id) {
+
+
+async function updateModal(id) {
   upModal.classList.toggle("active");
-  idUp = id;
-  const imageUp = document.querySelector('#imageUp');
-  const titleUp = document.querySelector('#titleUp');
-  const discUp = document.querySelector('#discUp');
-  const blogsDatas = JSON.parse(localStorage.getItem('blogs')) || [];
-  const blog = blogsDatas.find(blog => blog.id === id);
-  if (blog) {
-    titleUp.value = blog.title
-    discUp.value = blog.description
-    
-  }
-
-
-  const updateForm = document.querySelector("#updateForm");
-updateForm.addEventListener('submit', (e)=>{
-  e.preventDefault()
-  let imageName
-  const blogsDatas = JSON.parse(localStorage.getItem('blogs')) || [];
-
-
-  for(let b = 0;b<blogsDatas.length;b++){
-
-    if(blogsDatas[b].id === id){
-      if(imageUp.files.length === 0){
-        imageName = blogsDatas[b].imageName
-     }else{
-       imageName = imageUp.files[0].name
-     }
-      blogsDatas[b].imageName = imageName
-      blogsDatas[b].title = titleUp.value
-      blogsDatas[b].description = discUp.value 
-
-    }
-    
-  }
-  localStorage.setItem('blogs', JSON.stringify(blogsDatas))
-  window.location.reload()
-  
-  
-  
-})
+  await fetchSingleBlog(id)  
 }
+
+
+async function fetchSingleBlog(id){
+  let data=null;
+  await fetch(`http://localhost:4000/blog/singleBlog/${id}`, {
+  
+    headers:{
+      "Authorization": `Bearer ${token}`
+    }
+  }).then((response)=>{
+    if(!response.ok){
+      console.log("=====> Error")
+    }
+    return response.json()
+  }).then((data)=>{
+  
+   updateBlog(data.blog)
+   
+  
+  }).catch((error)=>{
+    console.log(error.message)
+  })
+
+}
+
+
+async function updateBlog(data){
+  const updateTitle = document.querySelector("#titleUp")
+  const updateDes = document.querySelector("#discUp")
+  const imageUrl = document.querySelector("#imageUp")
+  updateTitle.value = data.title
+  updateDes.value = data.description
+
+  const updateForm = document.querySelector("#updateForm")
+  updateForm.addEventListener("submit", async(e)=>{
+    e.preventDefault();
+    const formData = new FormData()
+    formData.append("imageUrl", imageUrl.files[0])
+    formData.append("title", updateTitle.value)
+    formData.append("description", updateDes.title)
+
+    await fetch(`http://localhost:4000/blog/updateBlog/${data._id}`,{
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
+      body: formData
+    }).then((res)=>{
+      if(!res.ok){
+        console.log("$$$$$$$---->error")
+      }
+      return res.json()
+    }).then((data)=>{
+      console.log(data)
+    }).catch((error)=>{
+      console.log(error.message)
+    })
+  })
+
+} 
 
 
 
@@ -104,7 +127,7 @@ window.addEventListener("click", (e) => {
 });
 
 function LoggOut() {
-  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("token");
   window.location.href = "signin.html";
 }
 
@@ -128,10 +151,11 @@ function addBlog(event) {
       isLiked: false,
     });
     localStorage.setItem("blogs", JSON.stringify(blogsData));
-    imageFile = ""
+    alert('Blog Added Successfully')
+    window.location.reload();
+    imageFile = " "
     title = ""
     description.value =""
-    window.location.reload();
 
   } else {
     alert("All filed are required");
@@ -141,31 +165,75 @@ function addBlog(event) {
 
 function deleteBlog(id){
   let blogsData = JSON.parse(localStorage.getItem('blogs')) || []
+  let allComment = JSON.parse(localStorage.getItem('comments')) || []
   for (let i = 0; i < blogsData.length; i++) {
     const deletableBlog = blogsData.findIndex(blog => blog.id === id);
     blogsData.splice(deletableBlog,1);
+   
     localStorage.setItem('blogs', JSON.stringify(blogsData))
-    window.location.reload()  
+ 
   }
+  let indexComment = allComment.findIndex(com => com.id === id);
+  let count =   1
+  for(let c = 0;c< allComment.length;c++){
+    if(allComment[c].id == id){
+      count = count +1
+   
+
+    }
+  
+    
+  }
+  
+    allComment.splice(indexComment,count)
+    localStorage.setItem('comments', JSON.stringify(allComment))
+
+
+}
+const fetchBlog = async ()=>{
+
+
+  await fetch('http://localhost:4000/blog/selectBlog', {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  }).then((response)=>{
+    if(!response.ok){
+      console.log("-------> Error")
+    }
+    return response.json()
+  }).then((data)=>{
+   
+    displayBlog(data.blog)
+    
+  
+  }).catch((error)=>{
+    console.log(error)
+  })
 }
 
-function displayBlog() {
+async function displayBlog(blogsData) {
+  console.log(blogsData)
   
   const allInsight = document.querySelector(".all-articles-card");
-  const blogsData = JSON.parse(localStorage.getItem("blogs")) || [];
+  // const blogsData = JSON.parse(localStorage.getItem("blogs")) || [];
+ 
+
   if (blogsData.length > 0) {
-    for (let i = 0; i <= 2; i++) {
+    for (let i = 0; i < blogsData.length; i++) {
       const insightCard = document.createElement("div");
       insightCard.classList.add("insight-card");
+      const id= blogsData[i]._id  ;
+     
       insightCard.innerHTML = `         
-            <div class="picture" style="cursor: pointer;" onclick="openBlogd(${i})">
-              <img src='../images/${blogsData[i].imageName}' alt="" />
+      <div class="picture" style="cursor: pointer;" onclick="openBlogd('${id}')">
+              <img src='${blogsData[i].imageUrl}' alt="" />
             </div>
        
             <div class="content">
              
 
-                <div class="headWord"  onclick="openBlogd(${i})" style="cursor:pointer;">
+                <div class="headWord"  onclick="openBlogd('${id}')" style="cursor:pointer;">
                 <h2>${blogsData[i].title}</h2>
                 <span
                 >${blogsData[i].description}</span
@@ -188,7 +256,7 @@ function displayBlog() {
                     />
                     </svg>
                     </div>
-                    <span>${blogsData[i].likes}</span>
+                    <span>${0}</span>
                     </div>
                     <div class="like">
                     <div>
@@ -211,7 +279,7 @@ function displayBlog() {
                         </div>
                         
                         <div class="like">
-                        <div onclick="deleteBlog(${blogsData[i].id})" style="position: absolute;right: 28px;">
+                        <div onclick="deleteBlog('${blogsData[i]._id}')" style="position: absolute;right: 28px;">
                           <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.5747 7.7175C16.5747 7.7175 16.0317 14.4525 15.7167 17.2895C15.5667 18.6445 14.7297 19.4385 13.3587 19.4635C10.7497 19.5105 8.13767 19.5135 5.52967 19.4585C4.21067 19.4315 3.38767 18.6275 3.24067 17.2965C2.92367 14.4345 2.38367 7.7175 2.38367 7.7175" stroke="#FF4A4A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M17.958 4.489H1" stroke="#FF4A4A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -220,7 +288,7 @@ function displayBlog() {
                             
                             
                         </div>
-                        <div onclick="updateModal(${blogsData[i].id})" style="right:0 ; position: absolute;">
+                        <div onclick="updateModal('${blogsData[i]._id}')" style="right:0 ; position: absolute;">
                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.8775 17.7258C19.4965 17.7258 20 18.2359 20 18.8629C20 19.4912 19.4965 20 18.8775 20H12.533C11.914 20 11.4105 19.4912 11.4105 18.8629C11.4105 18.2359 11.914 17.7258 12.533 17.7258H18.8775ZM14.4776 0.776737L16.1165 2.07865C16.7886 2.60419 17.2366 3.29695 17.3899 4.02554C17.5668 4.827 17.3781 5.61412 16.8475 6.29493L7.08489 18.9199C6.63684 19.4932 5.97657 19.8157 5.26913 19.8276L1.37822 19.8754C1.16599 19.8754 0.989126 19.7321 0.941963 19.529L0.0576649 15.695C-0.0956134 14.9903 0.0576649 14.2617 0.505709 13.7003L7.42682 4.74219C7.54472 4.59886 7.75695 4.57617 7.89844 4.68247L10.8107 6.99964C10.9994 7.15491 11.2588 7.23852 11.53 7.20269C12.1077 7.13102 12.4968 6.60548 12.4378 6.0441C12.4025 5.75745 12.261 5.51856 12.0723 5.3394C12.0134 5.29162 9.24257 3.07001 9.24257 3.07001C9.06571 2.92668 9.03034 2.66391 9.17183 2.48594L10.2684 1.0634C11.2824 -0.238515 13.051 -0.357956 14.4776 0.776737Z" fill="#FDA640"/>
                             </svg>
@@ -241,10 +309,13 @@ function displayBlog() {
     }
   } else {
     const emptyText = document.querySelector(".sorry");
-    emptyText.innerText = "Opps! there is no blog Available Please Add Some Blogs";
+    emptyText.innerText = "There is no blog Available Please Add Some Blogs";
   
   
     allInsight.appendChild(emptyText);
   }
 }
-displayBlog();
+function openBlogd(id) {
+  window.location.href = `./singleBlog.html?id=${id}`;
+}
+fetchBlog()

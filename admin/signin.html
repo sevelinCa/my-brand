@@ -1,43 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="./styles/responsive.css">
-</head>
-<body class="login">
-  <a href="../index.html">
-    <h1 class="logo">MY_<span>BRAND</span></h1>
-  </a>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/responsive.css" />
+  </head>
+  <body class="login">
+    <a href="../index.html">
+      <h1 class="logo">MY_<span>BRAND</span></h1>
+    </a>
 
     <div class="container">
-       <main class="main-signin">
-            <div class="signin-header">
-                <h1>Welcome Again</h1>
-                <span>Fill in your credentials</span>
-            </div>
-            <form id="formLogin">
-                <span style="font-size: 12px;color: rgb(253, 38, 38);padding: 0px 10px ;text-align: center;" class="errorMessage"></span>
-                <div class="contain">
-                    <span>Email</span>
-                    <input type="text" id="email" placeholder="Enter your email">
-                </div>
-                <div class="contain">
-                    <span>Password</span>
-                    <input type="password" id="password" placeholder="Enter your email">
-                </div>
-                <a href="#" class="forgot">forgot password?</a>
-                <button type="submit" class="btn">
-                    login
-                </button>
-                
-            </form>
-        </main>
-      
+      <main class="main-signin">
+        <div class="signin-header">
+          <h1>Welcome Again</h1>
+          <span>Fill in your credentials</span>
+        </div>
+        <form onsubmit="loginFunc(event)" id="formLogin">
+          <span
+            style="
+              font-size: 12px;
+              color: rgb(253, 38, 38);
+              padding: 0px 10px;
+              text-align: center;
+            "
+            class="errorMessage"
+          ></span>
+          <div class="contain">
+            <span>Email</span>
+            <input type="text" id="email" placeholder="Enter your email" />
+          </div>
+          <div class="contain">
+            <span>Password</span>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your email"
+            />
+          </div>
+          <a href="#" class="forgot">forgot password?</a>
+          <button type="submit" class="btn">login</button>
+        </form>
+      </main>
+      <script>
+        const errorMessage = document.querySelector(".errorMessage")
+        async function loginFunc(event) {
+          event.preventDefault();
+          const userData = {
+            email: document.querySelector("#email").value,
+            password: document.querySelector("#password").value,
+          };
 
+          await fetch("http://localhost:4000/auth/login", {
+            headers: {
+              "Content-type": "application/json",
+
+            },
+            method: "POST",
+            body: JSON.stringify(userData),
+          }).then((res) => res.json())
+            .then((data) => {
+              const setLocal = localStorage.setItem(
+                "token",
+                JSON.stringify(data.token)
+              );
+              if(data.message){
+                console.log(data.message)
+                errorMessage.innerHTML = data.message
+              }else if(data.user &&  data.token){
+             localStorage.setItem("user", JSON.stringify(data.user))
+             localStorage.setItem("token", JSON.stringify(data.token))
+             window.location.href="index.html"
+                
+              }
+            
+            })
+            .catch((error) => console.log(error.message));
+            setTimeout(()=>{
+              errorMessage.innerHTML=""
+
+            },2000)
+        }
+      </script>
     </div>
-    <script src="./auth.js"></script>
-</body>
+    <!-- <script src="./auth.js"></script> -->
+  </body>
 </html>

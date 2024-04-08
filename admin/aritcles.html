@@ -6,11 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/responsive.css">
-    <script>
-      if (!localStorage.getItem("isLoggedIn")) {
-        window.location.href = "signin.html";
-      }
-    </script>
+
 </head>
 <body>
   <nav>
@@ -54,6 +50,7 @@
           </div>
         </div>
       </div>
+      <div id="popup" class="popup"></div>
       <div id="profile" class="profile">
         <img src="../images/my-profile.png" alt="">
       </div>
@@ -88,7 +85,7 @@
     </div>
     </div>
     <div class="bottom_nav">
-      <span class="hello">Hello, Sevelin</span>
+      <span class="hello">Welcome Again</span>
       <span class="date"></span>
     </div>
   </nav>

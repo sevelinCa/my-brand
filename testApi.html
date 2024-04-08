@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="" id="myForm" method="post">
+      <input type="text" placeholder="username" id="username" />
+      <input type="email" placeholder="email" id="email" />
+      <input type="password" placeholder="password" id="password" />
+      <button type="submit">register</button>
+    </form>
+
+    <div class="img" style="display: flex; flex-direction: row; gap: 20px;margin-top: 20px;">
+      
+    </div>
+      <script>
+          fetch("http://localhost:5000/auth/login").then((response)=>{
+            if(!response.ok){
+              console.log("error")
+            }else{
+              return response.json()
+            }
+          }).then(data=>{
+            console.log(data)
+          }).catch((error)=>{
+            console.log(error.message)
+          })
+      </script>
+  </body>
+</html>
