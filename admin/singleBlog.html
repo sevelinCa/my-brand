@@ -83,27 +83,15 @@
       </div>
       </div>
       <div class="bottom_nav">
-        <span class="hello">Hello, Sevelin</span>
+        <span class="hello">Welcome Again</span>
         <span class="date"></span>
       </div>
     </nav>
 
     <div class="single-container">
       <div class="img-content">
-        <div class="image">
-          <img src="../images/insight1.png" alt="" />
-        </div>
-        <div class="content">
-          <h1>The Future of Cloud Computing</h1>
-          <span
-            >React Hooks simplify state management and side-effects in
-            functional components. Dive into how Hooks can make your React apps
-            React Hooks simplify state management and side-effects in functional
-            components. Dive into how Hooks can make your React apps React Hooks
-            simplify state management and side-effects in functional components.
-            Dive into how Hooks can make your React apps ...</span
-          >
-        </div>
+        <div class="image"></div>
+        <div class="content"></div>
         <div class="likes" style="position: relative;">
           <div
             class=""
@@ -126,7 +114,7 @@
                 fill="#858484"
               />
             </svg>
-            <span style="font-size: 14px; color: lightgray">154</span>
+            <span style="font-size: 14px; color: lightgray" class="likesCount"></span>
           </div>
           <div
             class=""
@@ -159,7 +147,7 @@
               </defs>
             </svg>
 
-            <span style="font-size: 14px; color: lightgray">154</span>
+            <span style="font-size: 14px; color: lightgray" class="commentCount">12</span>
           </div>
           <div class="operation">
             <div style="position: absolute;right: 40px;">
@@ -183,64 +171,60 @@
         </div>
         
       </div>
-      <div class="comment-content">
+      <div class="comment-content" style="position: fixed; right: 150px;">
         <h1>Comments</h1>
         <div class="comment">
-          <div class="person-comment">
-            <div class="person-header">
-              <div class="profile"></div>
-              <span class="">Ian Nunez</span>
-            </div>
-            <div class="person-content">
-              <span
-                >No those pups I marginalised activities blue. Prioritize due so
-                developing will didn't meeting shoulder back-end elephant.
-                Points backwards problem kpis wanted.</span
-              >
-            </div>
+         
           </div>
-          <div class="person-comment">
-            <div class="person-header">
-              <div class="profile"></div>
-              <span class="">Ian Nunez</span>
-            </div>
-            <div class="person-content">
-              <span
-                >No those pups I marginalised activities blue. Prioritize due so
-                developing will didn't meeting shoulder back-end elephant.
-                Points backwards problem kpis wanted.</span
-              >
-            </div>
-          </div>
-          <div class="person-comment">
-            <div class="person-header">
-              <div class="profile"></div>
-              <span class="">Ian Nunez</span>
-            </div>
-            <div class="person-content">
-              <span
-                >No those pups I marginalised activities blue. Prioritize due so
-                developing will didn't meeting shoulder back-end elephant.
-                Points backwards problem kpis wanted.</span
-              >
-            </div>
-          </div>
-          <div class="person-comment">
-            <div class="person-header">
-              <div class="profile"></div>
-              <span class="">Ian Nunez</span>
-            </div>
-            <div class="person-content">
-              <span
-                >No those pups I marginalised activities blue. Prioritize due so
-                developing will didn't meeting shoulder back-end elephant.
-                Points backwards problem kpis wanted.</span
-              >
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>
-    <script src="./script.js"></script>
+    <script>
+  
+
+      const fetchSingleBlod = async()=>{
+        const token = JSON.parse(localStorage.getItem("token"))
+         const url = new URL(window.location.href);
+         const id = url.searchParams.get("id");
+
+        
+        console.log(id)
+        await fetch(`http://localhost:4000/blog/singleBlog/${id}`, {
+          headers:{
+            "Authorization": `Bearer ${token}`
+          }
+        }).then((response)=>{
+          if(!response.ok){
+            console.log('--->Error')
+          }
+          return response.json()
+        }).then((data)=>{
+         displaySingleBlog(data.blog)
+        })
+      }
+      
+      function displaySingleBlog(blogsData) {
+        const singleContainer = document.querySelector(".single-container");
+        const image = document.querySelector(".image");
+        const content = document.querySelector(".content");
+        const likesCount = document.querySelector(".likesCount");
+
+        const h1 = document.createElement("h1");
+        const span = document.createElement("span");
+
+        // const blogsData = JSON.parse(localStorage.getItem("blogs")) || [];
+        console.log()
+        image.innerHTML = ` <img src="${blogsData.imageUrl}" alt="" />`;
+        h1.innerText = blogsData.title;
+        span.innerText = blogsData.description;
+        likesCount.innerText = blogsData.likes;
+        content.appendChild(h1)
+        content.appendChild(span);
+      }
+      window.onload= fetchSingleBlod()
+     
+    </script>
+ 
   </body>
 </html>

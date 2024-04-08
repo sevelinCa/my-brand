@@ -201,7 +201,7 @@
         const blogsData = JSON.parse(localStorage.getItem("comments")) || [];
         let countComment = 0;
         for (let i = blogsData.length - 1; i >= 0; i--) {
-          if (blogsData[i].id === id) {
+          if (blogsData[i].id == id) {
             const personComment = document.createElement("div");
             personComment.classList.add("person-comment");
             personComment.innerHTML = `
@@ -238,7 +238,7 @@
     
     
       for (let i = 0; i < blogData.length; i++) {
-       if (blogData[i].id === 2) {
+       if (blogData[i].id === idPr+1) {
          if(blogData[i].isLiked == true){
            blogData[i].likes--;
            blogData[i].isLiked = false

@@ -55,7 +55,7 @@ function displayBlog() {
                         />
                         </svg>
                         </div>
-                        <span>0aa</span>
+                        <span>0</span>
                         </div>
                         
                         
@@ -69,12 +69,12 @@ function displayBlog() {
     }
   } else {
     const emptyText = document.createElement("h1");
-    emptyText.innerText = "Oops! No blogs available yet. Check back later for updates!";
+    emptyText.innerText = "No blogs available yet. Check back later for updates!";
     emptyText.style = "color:orange;font-size:18px;width:600px"
     insightsMain.appendChild(emptyText);
   }
 }
-console.log();
+
 displayBlog();
 
 function openBlogd(id) {

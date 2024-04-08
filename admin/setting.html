@@ -1,8 +1,4 @@
-<script>
-  if(!localStorage.getItem('isLoggedIn')){
-    window.location.href='signin.html'
-  }
-</script>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -88,7 +84,7 @@
       </div>
       </div>
       <div class="bottom_nav">
-        <span class="hello">Hello, Sevelin</span>
+        <span class="hello">Welcome Again</span>
         <span class="date"></span>
       </div>
     </nav>
@@ -101,7 +97,7 @@
             <img src="../images/my-profile.png" alt="" />
           </div>
           <div class="admin-names">
-            <h1>Sevelin</h1>
+            <h1 class="profileUsername"></h1>
             <span>Administrator</span>
           </div>
         </div>
@@ -113,7 +109,7 @@
           </div>
           <div class="info">
             <span>Email</span>
-            <p>ngabosevelin@gmail.com</p>
+            <p class="profileEmail"></p>
           </div>
         </div>
       </div>
@@ -140,19 +136,19 @@
           </div>
           <div class="input-contain">
             <span>Username</span>
-            <input type="text" value="Ngabo Sevelin">
+            <input id="updateUsername" type="text" value="">
           </div>
           <div class="input-contain">
             <span>Email</span>
-            <input type="text" value="ngabosevelin@gmail.com">
+            <input id="updateEmail" type="text" value="">
           </div>
           <div class="input-contain">
             <span>password</span>
-            <input type="password" value="Ngabo Sevelin">
+            <input id="updatePassword" type="password" value="">
           </div>
         </div>
 
-        <button  class="btn">Update Profile</button>
+        <button onclick="updateUser(event)" style="cursor: pointer;"  class="btn">Update Profile</button>
         </form>
 
 
@@ -160,7 +156,7 @@
       <div class="setting-form">
         <h1>Create A new Admin</h1>
       
-        <form class="form" id="formRegister">
+        <form onsubmit="createUser(event)" class="form" id="formRegister">
           <span id="errorRegister" style="color: rgb(244, 76, 76);"></span>
           <div class="form-container create">
 
@@ -168,17 +164,17 @@
           
           <div class="input-contain">
             <span>Username</span>
-            <input id="username" type="text" value="" placeholder="Type Username">
+            <input id="usernameRegister" type="text"  placeholder="Type Username">
           </div>
           <div class="input-contain">
             <span>Email</span>
-            <input id="emailRegister" type="text" value=""  placeholder="Type Email">
+            <input id="emailRegister" type="text"  placeholder="Type Email">
           </div>
           <div class="input-contain">
             <span>password</span>
-            <input id="passwordRegister" type="password" value=""  placeholder="Type password">
+            <input id="passwordRegister" type="password"   placeholder="Type password">
           </div>
-          <button type="submit" id="btnsubmit" class="btn">Create</button>
+          <button type="" id="btnsubmit" class="btn">Create</button>
         </div>
 
         </form>
@@ -186,7 +182,105 @@
 
       </div>
     </div>
+    <script>
+const emailRegister = document.querySelector('#emailRegister');
+const username = document.querySelector('#usernameRegister');
+const passwordRegister = document.querySelector('#passwordRegister');
+const errorRegister = document.querySelector("#errorRegister");
+const fromRegister = document.querySelector("#formRegister")
+ async function createUser(e){
+  
+    e.preventDefault();
+    regex =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    
+
+    if(emailRegister.value === ""){
+        errorRegister.textContent = "Email Is Required";
+        emailRegister.classList.add('error')
+   
+    }
+    else if(passwordRegister.value == "Password Is Required"){
+        errorRegister.textContent = "Pasword Is Required";
+        passwordRegister.classList.add('error')
+
+    }
+    else if(passwordRegister.value.length <6){
+        errorRegister.textContent = "Pasword Is Required";
+        passwordRegister.classList.add('error')
+
+    }    else if(regex.test(emailRegister.value)== false){
+    
+    errorRegister.innerHTML="Please Enter Valid Email"
+   }
+
+    else{
+        let usersData = JSON.parse(localStorage.getItem('users')) || [];
+        usersData ={
+            username: username.value,
+            email: emailRegister.value,
+            password: passwordRegister.value
+        }
+        await fetch("http://localhost:4000/auth/register", {
+            headers: {
+              "Content-type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(usersData),
+          }).then(response=>response.json()).then((data)=>{
+          if(data.user){
+            localStorage.setItem("user", JSON.stringify(data.user))
+             localStorage.setItem("token", JSON.stringify(data.token))
+             alert("Account Create successfully")
+             window.location.reload()
+          }
+
+        }).catch((error)=>{
+          console.log(error.message)
+        })
+      
+     
+    }
+
+}
+
+const updateUsername = document.querySelector('#updateUsername')
+const updateEmail = document.querySelector('#updateEmail')
+const updatePassword = document.querySelector('#updatePassword')
+const profileUsername = document.querySelector('.profileUsername')
+const profileEmail = document.querySelector('.profileEmail')
+const isLogedIn = localStorage.getItem('isLoggedIn')
+const userData = JSON.parse(localStorage.getItem('users'))
+
+for(let u = 0 ;u<userData.length;u++){
+  if(userData[u].username == isLogedIn){
+    updateUsername.value = userData[u].username
+    updateEmail.value = userData[u].email
+    updatePassword.value = userData[u].password
+    
+    
+    profileEmail.innerHTML = userData[u].email
+    profileUsername.innerHTML = userData[u].username
+  }
+}
+
+function updateUser(e){
+  e.preventDefault()
+  const userIndex = userData.findIndex(user=> user.username == isLogedIn)
+  userData[userIndex].username = updateUsername.value;
+  userData[userIndex].email = updateEmail.value;
+  userData[userIndex].password = updatePassword.value;
+
+  localStorage.setItem('users', JSON.stringify(userData))
+  localStorage.setItem('isLoggedIn',updateUsername.value)
+  alert('Admin Update successfully')
+  window.location.reload()
+ 
+}
+
+    </script>
     <script src="./script.js"></script>
-    <script src="./auth.js"></script>
+
+    <!-- <script src="./auth.js"></script> -->
   </body>
 </html>

@@ -41,6 +41,13 @@ nav{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+body{
+  
+    padding: 130px 0px;
 }
 nav .top-nav{
     display: flex;
@@ -496,6 +503,7 @@ main .articles .artcles-head a{
     background: transparent;
     border: 1px  solid var(--subText);
     border-radius: 6px;
+    color: white;
 }
 .new-form .input-contain textarea{
     padding: 10px;
@@ -504,6 +512,7 @@ main .articles .artcles-head a{
     border: 1px  solid var(--subText);
     border-radius: 6px;
     height: 14vh;
+    color: white;
 
 }
 .new-form button{
@@ -573,7 +582,7 @@ main .articles .artcles-head a{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 40%;
+    width: 30%;
   
     background-color: var(--subBack);
     padding: 20px;
@@ -589,6 +598,10 @@ main .articles .artcles-head a{
     -webkit-line-clamp: 3; 
     
    
+}
+.single-container .comment-content .profile-name{
+    display: flex;
+    align-items: center; gap: 10px;
 }
 
 .single-container .comment-content::-webkit-scrollbar{
@@ -621,7 +634,7 @@ main .articles .artcles-head a{
 }.single-container .comment-content .person-header span{
     color: white;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 12px;
 }
 .single-container .comment-content span{
     color: var(--subText);
@@ -956,4 +969,26 @@ main .articles .artcles-head a{
 }
 .notification-container .notifi .notifi-contain h2{
     font-size: 14px;color:  black;
+}
+
+.cardContainer{
+    display: flex;
+    padding: 20px 100px;
+    font-size: 12px;
+    flex-direction: row ;
+    gap: 10px;
+}
+.cardContainer .card{
+    background: var(--mainColor);
+    padding: 20px 30px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    
+}
+.cardContainer .card span{
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(255, 255, 255);
 }
