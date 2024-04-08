@@ -10,17 +10,17 @@ async function checkLoggedIn(){
             }
         }).then((response)=>{
             if(!response.ok){
-                window.open('signin.html')
+                window.location.href='signin.html'
             }
             return response.json()
         }).then((data)=>{
             if(data.message === "success"){
                 console.log("Authorization")
             }else{
-                window.open('signin.html')
+                window.location.href='signin.html'
             }
         })
     }
 
 }
-checkLoggedIn()
+window.onload=checkLoggedIn()
