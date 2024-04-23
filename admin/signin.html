@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
+    <link rel="stylesheet" href="./styles/loader.css" />
   </head>
   <body class="login">
     <a href="../index.html">
@@ -41,12 +42,19 @@
             />
           </div>
           <a href="#" class="forgot">forgot password?</a>
-          <button type="submit" class="btn">login</button>
+          <button type="submit" class="btn">
+            <span class="loader"></span>
+            <span class="btn-word">Login</span>
+          </button>
         </form>
       </main>
       <script>
-        const errorMessage = document.querySelector(".errorMessage")
+        const loader = document.querySelector(".loader");
+        const btnWord = document.querySelector(".btn-word");
+        const errorMessage = document.querySelector(".errorMessage");
         async function loginFunc(event) {
+          btnWord.style.display = "none";
+          loader.style.display = "block";
           event.preventDefault();
           const userData = {
             email: document.querySelector("#email").value,
@@ -56,32 +64,33 @@
           await fetch("http://localhost:4000/auth/login", {
             headers: {
               "Content-type": "application/json",
-
             },
             method: "POST",
             body: JSON.stringify(userData),
-          }).then((res) => res.json())
+          })
+            .then((res) => res.json())
             .then((data) => {
-              const setLocal = localStorage.setItem(
-                "token",
-                JSON.stringify(data.token)
-              );
-              if(data.message){
-                console.log(data.message)
-                errorMessage.innerHTML = data.message
-              }else if(data.user &&  data.token){
-             localStorage.setItem("user", JSON.stringify(data.user))
-             localStorage.setItem("token", JSON.stringify(data.token))
-             window.location.href="index.html"
-                
+              if (data.message) {
+                console.log(data.message);
+                btnWord.style.display = "block";
+                loader.style.display = "none";
+                errorMessage.innerHTML = data.message;
+              } else if (data.user && data.token) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+                localStorage.setItem("token", JSON.stringify(data.token));
+                localStorage.setItem(
+                  "refreshToken",
+                  JSON.stringify(data.refreshToken)
+                );
+                btnWord.style.display = "block";
+                loader.style.display = "none";
+                window.location.href = "index.html";
               }
-            
             })
-            .catch((error) => console.log(error.message));
-            setTimeout(()=>{
-              errorMessage.innerHTML=""
-
-            },2000)
+            .catch((error) => console.log(error));
+          setTimeout(() => {
+            errorMessage.innerHTML = "";
+          }, 2000);
         }
       </script>
     </div>

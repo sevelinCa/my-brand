@@ -6,15 +6,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
+    <link rel="stylesheet" href="./styles/loader.css">
   </head>
   <body>
     <div class="container">
       <nav>
-        <a href="./">
+        <a href="./index.html">
           <h1 class="logo">MY_<span>BRAND</span></h1>
         </a>
         <ul id="navbar" class="links">
-          <li><a href="./">Home</a></li>
+          <li><a href="./index.html">Home</a></li>
           <li><a href="./contactus.html">Contact Us</a></li>
           <li><a href="./aboutus.html">About Us</a></li>
           <li><a href="./portfolio.html">Portfolio</a></li>
@@ -23,9 +24,9 @@
         </ul>
         <ul id="navbarphone" class="linksphone">
           <li><a href="./">Home</a></li>
-          <li><a href="contactus.html">Contact Us</a></li>
-          <li><a href="aboutus.html">About Us</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="./contactus.html">Contact Us</a></li>
+          <li><a href="./aboutus.html">About Us</a></li>
+          <li><a href="./portfolio.html">Portfolio</a></li>
           <li><a href="./blogs.html">Blogs</a></li>
           <li><a href="./admin/signin.html">Sign in</a></li>
         </ul>
@@ -48,11 +49,20 @@
           </svg>
         </div>
       </nav>
-
+      <div id="popup" class="popup"></div>
       <div class="single-container">
+       
+        
         <div class="img-content">
           <div class="image"></div>
-          <div class="content"></div>
+          <div class="content">
+            <div class="loading-wave" >
+              <div class="loading-bar"></div>
+              <div class="loading-bar"></div>
+              <div class="loading-bar"></div>
+              <div class="loading-bar"></div>
+            </div>
+          </div>
         </div>
         <div class="comment-content">
           <div class="likes" style="position: relative">
@@ -127,12 +137,17 @@
               <input type="text" id="comment" placeholder="Comment Here" />
             </div>
 
-            <button type="submit">Comment</button>
+            <button type="submit">
+              <span class="loader"></span>
+              <span class="btn-word">Comment</span>
+            </button>
           </form>
         </div>
       </div>
     </div>
     <script>
+      const loaderWave = document.querySelector(".loading-wave")
+      const loader= document.querySelector(".loader")
       const likeBtn = document.querySelector("likeBtn");
       const url = new URL(window.location.href);
       const id = url.searchParams.get("id");
@@ -152,32 +167,81 @@
         "December",
       ];
 
-      commentForm.addEventListener("submit", (e) => {
-        const newData = new Date();
-        const month = newData.getMonth();
-        const monthWord = monthsArray[month];
-        const day = newData.getDate();
-        const hours = newData.getHours();
-        const minutes = newData.getMinutes();
+      commentForm.addEventListener("submit", async (e) => {
+        loader.style.display="block"
+        document.querySelector(".btn-word").style.display="none"
         e.preventDefault();
         const name = document.querySelector("#name");
         const comment = document.querySelector("#comment");
-
-        const commentData = JSON.parse(localStorage.getItem("comments")) || [];
-        commentData.push({
+        const commentData = {
           name: name.value,
           comment: comment.value,
-          id: id,
-          date: `${monthWord} / ${day}`,
-          time: `${hours}:${minutes}`,
-        });
-        localStorage.setItem("comments", JSON.stringify(commentData));
+          blog: id,
+        };
 
-        window.alert("Comment added successfully!");
-        window.location.reload();
+        await fetch(`http://localhost:4000/blog/addComment`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(commentData),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              console.log(error);
+            }
+            return res.json();
+          })
+          .then((data) => {
+            if (data.data) {
+              loader.style.display="none"
+              document.querySelector(".btn-word").style.display="block"
+              var popup = document.getElementById("popup");
+              popup.textContent = "Blog Add Successfully";
+              popup.classList.add("show");
+              window.location.reload();
+            } else {
+              alert(data.message);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       });
 
-      function displaySingleBlog() {
+      const fetchSingleBlog = async () => {
+        await fetch(`http://localhost:4000/blog/singleBlog/${id}`)
+          .then((res) => {
+            if (!res.ok) {
+              console.log("------>error");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            loaderWave.style.display="none"
+            displaySingleBlog(data.blog);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      };
+
+      async function fetchComment(){
+        await fetch(`http://localhost:4000/blog/selectComment/${id}`).then((res)=>{
+          if(!res.ok){
+            console.log("---->error")
+          }
+          return res.json()
+        }).then((data)=>{
+          console.log(data.comment)
+          displayComment(data.comment)
+        }).catch((error)=>{
+          console.log(error)
+        })
+      }
+
+
+      async function displaySingleBlog(blogsData) {
         const singleContainer = document.querySelector(".single-container");
         const image = document.querySelector(".image");
         const content = document.querySelector(".content");
@@ -186,83 +250,50 @@
         const h1 = document.createElement("h1");
         const span = document.createElement("span");
 
-        const blogsData = JSON.parse(localStorage.getItem("blogs")) || [];
-        image.innerHTML = ` <img src="../images/${blogsData[id].imageName}" alt="" />`;
-        h1.innerText = blogsData[id].title;
-        span.innerText = blogsData[id].description;
-        likesCount.innerText = blogsData[id].likes;
+        h1.innerText = blogsData.title;
+        span.innerText = blogsData.description;
+        likesCount.innerText = blogsData.likes;
+        image.innerHTML = `<img src='${blogsData.imageUrl}' />`;
         content.appendChild(h1);
         content.appendChild(span);
       }
 
-      function displayComment() {
+
+      function displayComment(commentData) {
         const comment = document.querySelector(".comment");
         const commentCount = document.querySelector(".commentCount");
-        const blogsData = JSON.parse(localStorage.getItem("comments")) || [];
         let countComment = 0;
-        for (let i = blogsData.length - 1; i >= 0; i--) {
-          if (blogsData[i].id == id) {
+        for (let i = commentData.length - 1; i >= 0; i--) {
+         
             const personComment = document.createElement("div");
             personComment.classList.add("person-comment");
             personComment.innerHTML = `
              <div class="person-header">
                   <div class="profile-name">
                     <div class="profile"></div>
-                    <span class="">${blogsData[i].name}</span>
+                    <span class="">${commentData[i].name}</span>
                   </div>
                   <div class="timeBlock">
-                    <span>${blogsData[i].date}</span>
-                    <span>${blogsData[i].time}</span>
+                    <span>${new Date(commentData[i].createdAt).toLocaleDateString()}</span>
+                    <span>${new Date(commentData[i].createdAt).toLocaleTimeString([], {hour:'2-digit', minute: '2-digit'})}</span>
+
                     </div>
                 </div>
                 <div class="person-content">
                   <span
-                    >${blogsData[i].comment}</span
+                    >${commentData[i].comment}</span
                   >
                 </div>`;
             comment.appendChild(personComment);
             countComment++;
           }
           commentCount.innerHTML = countComment;
-        }
+        
       }
-      displayComment();
-
-      displaySingleBlog();
-      function likeBlogs() {
-      
-      
-      let blogData = JSON.parse(localStorage.getItem("blogs")) || [];
-      const idPr = parseInt(id)
-    
-    
-    
-      for (let i = 0; i < blogData.length; i++) {
-       if (blogData[i].id === idPr+1) {
-         if(blogData[i].isLiked == true){
-           blogData[i].likes--;
-           blogData[i].isLiked = false
-    
-         }else{
-    
-           blogData[i].likes++;
-           blogData[i].isLiked = true
-         }
-      
-      }
-      }
-      localStorage.setItem("blogs", JSON.stringify(blogData));
-      window.location.reload()
-    
-    }
-    
-
-      
-
-
+      fetchComment()
+      fetchSingleBlog();
     </script>
 
     <script src="./main.js"></script>
- 
   </body>
 </html>

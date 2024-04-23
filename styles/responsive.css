@@ -81,6 +81,22 @@
         width: 40%;
        
     }
+
+        .single-container{
+            display: flex;
+            flex-direction: column;
+        }
+        .single-container .img-content{
+            width: 100%;
+        }
+        .comment-content{
+            position: relative;
+            right: 0vh;
+            z-index: 1000;
+            width: 100%;
+            
+        }
+        
   
 }
 
@@ -213,6 +229,20 @@
         gap: 10px;
         grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
     }
- 
+    .comment-content .input-content{
+        max-width: 100%;
+    }
+    .comment-content .input-content input{
+    
+        padding: 10px;
+        width: 60%;
+    }
+    .comment-content .input-content #name{
+        width: 40%;
+        
+    }
+    .comment-content .input-content button{
+        width: 100%;
+    }
     
 }

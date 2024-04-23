@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/responsive.css" />
+    <style>
+
+      .users {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px 100px;
+      }
+      .users .singleUser {
+        background: #2B2835;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+       
+        border-radius: 8px;
+      }
+      .users .singleUser span {
+        color: white;
+      
+      }
+      .users .profile {
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .users .profile span{
+        text-transform: uppercase;
+      }
+      .users .profile span{
+        color: black;
+        font-weight: 700;
+      }
+      .users .singleDetail{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <script src="navbar.js"></script>
+    <div style="padding: 20px 100px">
+      <span style="color: white">All Admin</span><br /><br />
+    </div>
+    <div class="users"></div>
+
+    <script>
+      const token = JSON.parse(localStorage.getItem("token"));
+      const user = JSON.parse(localStorage.getItem("user"))
+     
+      
+
+      async function fetchUsers() {
+        await fetch("http://localhost:4000/auth/users", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((res) => {
+            if (!res.ok) {
+              console.log("------------->error");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            displayUser(data.users);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
+      const displayUser = (data) => {
+        const usersContainer = document.querySelector(".users");
+        let whoIs = "OTHER"
+        if (data.length > 0) {
+          for (let i = 0; i < data.length; i++) {
+            if(data[i].username === user.username){
+                whoIs = "YOU"
+            }
+
+            const singleUser = document.createElement("div");
+
+            singleUser.classList.add("singleUser");
+            singleUser.innerHTML = `
+                    <div class='profile'>
+                        <span>
+                            ${data[i].username.split(' ')[0].slice(0,1)}
+                            ${data[i].username.split(' ')[1]? data[i].username.split(' ')[1].slice(0,1): ""}
+                        </span>
+                        
+                        </div>
+                        <div class='singleDetail'>
+                            <span style="color:orange;font-size:14px">username</span>
+                            <span>${data[i].username}</span>
+                        </div>
+                        <div class='singleDetail'>
+                            <span style="color:orange;font-size:14px">email</span>
+                            <span>${data[i].email}</span>
+                        </div>
+                        <div class='singleDetail'>
+                          
+                            <span>${whoIs}</span>
+                        </div>
+                        `;
+            usersContainer.appendChild(singleUser);
+          }
+        }
+      };
+      fetchUsers();
+    </script>
+  </body>
+</html>

@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="./styles/responsive.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/responsive.css" />
+    <link rel="stylesheet" href="./styles/loader.css" />
+  </head>
+  <body>
     <div class="container">
       <nav>
-        <a href="./">
+        <a href="./index.html">
           <h1 class="logo">MY_<span>BRAND</span></h1>
         </a>
         <ul id="navbar" class="links">
-          <li><a href="./">Home</a></li>
+          <li><a href="./index.html">Home</a></li>
           <li><a href="./contactus.html">Contact Us</a></li>
           <li><a href="./aboutus.html">About Us</a></li>
           <li><a href="./portfolio.html">Portfolio</a></li>
           <li><a href="./blogs.html">Blogs</a></li>
           <li><a href="./admin/signin.html">Sign In</a></li>
-         
         </ul>
         <ul id="navbarphone" class="linksphone">
-          <li><a href="./">Home</a></li>
+          <li><a href="./index.html">Home</a></li>
           <li><a href="./contactus.html">Contact Us</a></li>
           <li><a href="./aboutus.html">About Us</a></li>
           <li><a href="./portfolio.html">Portfolio</a></li>
           <li><a href="./blogs.html">Blogs</a></li>
-         
         </ul>
 
         <div id="toggle" class="toggle">
@@ -50,94 +49,134 @@
         </div>
       </nav>
 
-        <main>
-            <div class="contact-us">
-                <h1>Contact Us</h1>
-                <div class="contact-container">
-                  <div class="contact-info">
-                    <div class="info">
-                      <span>Email</span>
-                      <p>ngabosevelin@gmail.com</p>
-                    </div>
-                    <div class="info">
-                      <span>Phone</span>
-                      <p>+250792570064</p>
-                    </div>
-                    <div class="info">
-                      <span>Business Hours</span>
-                      <p>monday to sunday 7:00AM-9:00PM</p>
-                    </div>
-                  </div>
-                  <div class="contact-form">
-                    <form id="messageForm" action="">
-                      <input id="username" type="text" placeholder="Your Name" />
-                      <input id="useremail" type="text" placeholder="Your Email" />
-                      <textarea
-                        name="message"
-                        placeholder="Your Message"
-                        id="messages"
-                        cols="30"
-                        rows="4"
-                      ></textarea>
-                      <button type="submit">Submit</button>
-                    </form>
-                  </div>
-                </div>
+      <main>
+        <div class="contact-us">
+          <h1>Contact Us</h1>
+          <div class="contact-container">
+            <div class="contact-info">
+              <div class="info">
+                <span>Email</span>
+                <p>ngabosevelin@gmail.com</p>
               </div>
-        </main>
-
-    </div>
-    <footer>
-        <div class="footer-container">
-          <div class="logo">
-            <h1>MY_<span>BRAND</span></h1>
-          </div>
-          <div class="start">
-            <h3>Start Your Project Today</h3>
-            <span
-              >Ready to transform your vision into reality?
-              <a href=""> Contact us</a> to discuss how we can help.</span
-            >
-          </div>
-          <div class="subscribe">
-            <h3>SUBSCRIBE NOW</h3>
-            <form action="">
-              <input type="text" placeholder="Type Your Email" />
-              <button>submit now</button>
-            </form>
+              <div class="info">
+                <span>Phone</span>
+                <p>+250792570064</p>
+              </div>
+              <div class="info">
+                <span>Business Hours</span>
+                <p>monday to sunday 7:00AM-9:00PM</p>
+              </div>
+            </div>
+            <div class="contact-form">
+              <form id="messageForm" action="">
+                <input
+                  value=""
+                  id="username"
+                  type="text"
+                  placeholder="Your Name"
+                />
+                <input
+                  value=""
+                  id="useremail"
+                  type="text"
+                  placeholder="Your Email"
+                />
+                <textarea
+                  name="message"
+                  value=""
+                  placeholder="Your Message"
+                  id="messages"
+                  cols="30"
+                  rows="4"
+                ></textarea>
+                <button type="submit">
+                  <span class="loader"></span>
+                  <span class="btn-word">Send</span>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-        <span class="copy">© 2024 My_Brand. All rights reserved.</span>
-      </footer>
+        <div id="popup" class="popup"></div>
+      </main>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <div class="logo">
+          <h1>MY_<span>BRAND</span></h1>
+        </div>
+        <div class="start">
+          <h3>Start Your Project Today</h3>
+          <span
+            >Ready to transform your vision into reality?
+            <a href=""> Contact us</a> to discuss how we can help.</span
+          >
+        </div>
+        <div class="subscribe">
+          <h3>SUBSCRIBE NOW</h3>
+          <form id="subscribeForm">
+            <input type="text" id="subEmail" placeholder="Type Your Email" />
+            <button>submit now</button>
+          </form>
+        </div>
+      </div>
+      <span class="copy">© 2024 My_Brand. All rights reserved.</span>
+    </footer>
 
-      <script>
-        const messageForm = document.querySelector('#messageForm');
-        const username = document.querySelector('#username')
-        const useremail = document.querySelector('#useremail')
-        const message = document.querySelector('#messages')
+    <script>
+      const loader = document.querySelector(".loader");
+      const messageForm = document.querySelector("#messageForm");
+      const username = document.querySelector("#username");
+      const useremail = document.querySelector("#useremail");
+      const message = document.querySelector("#messages");
+      const token = JSON.parse(localStorage.getItem("token"));
 
-        messageForm.addEventListener('submit', (e)=>{
-          e.preventDefault()
-          if(username !== "" && useremail !== "" && message !==""){
-            const currentMessage = JSON.parse(localStorage.getItem('message')) || []
-            currentMessage.push({
-              id: currentMessage.length+1,
-              username: username.value,
-              email: useremail.value,
-              message: message.value
-              
+      messageForm.addEventListener("submit", async (e) => {
+        (loader.style.display = "flex"),
+          (document.querySelector(".btn-word").style.display = "none");
+        e.preventDefault();
+        if (username !== "" && useremail !== "" && message !== "") {
+          const messageData = {
+            name: username.value,
+            email: useremail.value,
+            message: message.value,
+          };
 
+          await fetch("http://localhost:4000/message/sendMessage", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(messageData),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                console.log("--->error");
+              }
+              return response.json();
             })
-            localStorage.setItem('message', JSON.stringify(currentMessage))
-            alert('message added');
-            window.location.reload()
-
-          }else{
-            alert('All field are required')
-          }
-
-        })
-      </script>
-      <script src="./main.js"></script>
-</body>
+            .then((data) => {
+              (loader.style.display = "none"),
+                (document.querySelector(".btn-word").style.display = "flex");
+              var popup = document.getElementById("popup");
+              popup.textContent = "Message Sent";
+              popup.classList.add("show");
+              (username.value = ""),
+                (useremail.value = ""),
+                (message.value = ""),
+                setTimeout(function () {
+                  popup.classList.remove("show");
+                  reloadFunc();
+                }, 3000);
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+        } else {
+          alert("All field are required");
+        }
+      });
+    </script>
+    <script src="./main.js"></script>
+  </body>
 </html>

@@ -1,18 +1,48 @@
-function displayBlog() {
-  const insightsMain = document.getElementById("ii");
-  const blogsData = JSON.parse(localStorage.getItem("blogs")) || [];
+const insightsMain = document.querySelector(".insights-main");
+const loadingWave = document.querySelector(".loading-wave");
+async function fetchBlog() {
+  
+  await fetch("http://localhost:4000/blog/selectBlog")
+    .then((res) => {
+      if (!res.ok) {
+        console.log("------< error");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (data.blog) {
+        loadingWave.style.display = "none"
+        displayBlog(data.blog);
+      }
+    });
+}
+
+async function displayBlog(blogsData) {
   if (blogsData.length > 0) {
     for (let i = 0; i < blogsData.length; i++) {
+      const comments = await fetch(
+        `http://localhost:4000/blog/selectComment/${blogsData[i]._id}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if(data.comment){
+            return data.comment
+          }else{
+            return []
+          }
+        }).catch((error)=>{
+          return error.message
+        });
+
       const insightCard = document.createElement("div");
       insightCard.classList.add("insight-card");
       insightCard.innerHTML = `         
-            <div class="picture" style="cursor: pointer;" onclick="openBlogd(${i})">
-              <img src='./images/${blogsData[i].imageName}' alt="" />
+            <div class="picture" style="cursor: pointer;" onclick="openBlogd('${blogsData[i]._id}')">
+              <img src='${blogsData[i].imageUrl}' alt="" />
             </div>
        
             <div class="content">
              
-
                 <div class="headWord"  onclick="openBlogd(${i})" style="cursor:pointer;">
                 <h2>${blogsData[i].title}</h2>
                 <span
@@ -21,7 +51,7 @@ function displayBlog() {
                 </div>
               <div class='ope'>
               <div class="operation">
-              <div onclick="likeBlog(${blogsData[i].id})"  class="like">
+              <div onclick="likeBlog('${blogsData[i]._id}')"  class="like">
               <div>
               <svg
               width="20"
@@ -55,7 +85,7 @@ function displayBlog() {
                         />
                         </svg>
                         </div>
-                        <span>0</span>
+                        <span class="commentNumber">${comments.length}</span>
                         </div>
                         
                         
@@ -69,42 +99,51 @@ function displayBlog() {
     }
   } else {
     const emptyText = document.createElement("h1");
-    emptyText.innerText = "No blogs available yet. Check back later for updates!";
-    emptyText.style = "color:orange;font-size:18px;width:600px"
+    emptyText.innerText =
+      "No blogs available yet. Check back later for updates!";
+    emptyText.style = "color:orange;font-size:18px;width:600px";
     insightsMain.appendChild(emptyText);
   }
 }
-
-displayBlog();
 
 function openBlogd(id) {
   window.location.href = `./openedBlog.html?id=${id}`;
 }
 
-function likeBlog(id) {
-      
-      
-  let blogData = JSON.parse(localStorage.getItem("blogs")) || [];
+fetchBlog();
 
+// like blog function
 
-
-  for (let i = 0; i < blogData.length; i++) {
-   if (blogData[i].id === id) {
-     if(blogData[i].isLiked == true){
-       blogData[i].likes--;
-       blogData[i].isLiked = false
-
-     }else{
-
-       blogData[i].likes++;
-       blogData[i].isLiked = true
-     }
-  
+async function likeBlog(id) {
+  let likedBlog = JSON.parse(localStorage.getItem("likedBlog")) || [];
+  let action = "";
+  if (!likedBlog.find((blog) => blog.id === id)) {
+    likedBlog.push({ id: id });
+    action = "like";
+    localStorage.setItem("likedBlog", JSON.stringify(likedBlog));
+  } else {
+    const index = likedBlog.findIndex((blog) => blog.id === id);
+    likedBlog.splice(index, 1);
+    action = "unlike";
+    localStorage.setItem("likedBlog", JSON.stringify(likedBlog));
   }
-  }
-  localStorage.setItem("blogs", JSON.stringify(blogData));
-  window.location.reload()
-
+  await fetch(`http://localhost:4000/blog/addLike/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ action: action }),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        console.log("-------------->error here");
+      }
+      return res.json();
+    })
+    .then((data) => {
+        window.location.reload()
+    })
+    .catch((error) => {
+      console.log("------------------->", error.message);
+    });
 }
-
-

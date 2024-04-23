@@ -44,6 +44,7 @@ nav{
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 300;
 }
 body{
   
@@ -322,7 +323,7 @@ main .articles .artcles-head a{
 }
 .insights-main{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
     gap: 10px;
 }
 
@@ -437,6 +438,7 @@ main .articles .artcles-head a{
     background-color: var(--mainColor);
     color: var(--whiteText);
     width: 100%;
+    height: 40px;
     border-radius: 16px;
 }
 
@@ -516,12 +518,15 @@ main .articles .artcles-head a{
 
 }
 .new-form button{
-    width: 100px;
-    height: 40px;
-    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 10px;
+    height: 50px;
     border: none;
     background-color: var(--mainColor);
     color: var(--whiteText);
+    cursor: pointer;
 }
 .aritcles-head{
     display: flex;
@@ -859,7 +864,7 @@ main .articles .artcles-head a{
     height: 100vh;
     background: rgba(0, 0, 0, 0.589);
     top: 0;
-    z-index: 50;
+    z-index: 500;
     display: none;
     align-items: center;
     justify-content: center;

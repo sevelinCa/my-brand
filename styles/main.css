@@ -41,6 +41,7 @@ html{
     background: var(--background);
     top: 0;
     left: 0;
+    z-index: 3000;
   
     
 }
@@ -637,8 +638,11 @@ footer  .copy{
     flex-direction: row;
     gap: 20px;
     padding: 60px 0px;
+  
 
 }
+
+
 .single-container .img-content{
     width: 65%;
     display: flex;
@@ -798,4 +802,33 @@ footer  .copy{
 }
 .comment-content .comment::-webkit-scrollbar-thumb{
     background: var(--mainColor);
+}
+.popup {
+    visibility: hidden;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff8a37;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    border-radius: 5px;
+    z-index: 999;
+}
+.popup.show {
+    visibility: visible;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
 }

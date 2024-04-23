@@ -6,6 +6,54 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
+    <link rel="stylesheet" href="./styles/loader.css" />
+    <style>
+  
+         .container{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border: 1px solid lightblue;
+            padding: 10px;
+            border-radius: 10px;
+         }
+         .options{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            background-color: orange;
+            padding: 6px;
+            border-radius: 6px;
+
+         }
+         .icon{
+            background-color: rgb(255, 255, 255);
+        
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 4px;
+            font-size: 12px;
+            font-family: sans-serif;
+            border: none;
+         }
+         .field{
+            border: 1px solid lightblue;
+            padding: 10px;
+            border-radius: 6px;
+            max-width: 400px;
+            max-height: 40vh;
+            overflow-y: scroll;
+            color: white;
+            /* font-weight: 300; */
+         }
+         .field:focus{
+            outline: none;
+         }
+    </style>
   </head>
   <body>
     <nav>
@@ -148,47 +196,65 @@
             placeholder="type blog title"
           ></textarea>
         </div>
-        <button type="submit">ADD BLOG</button>
+        <div class="field" id="editor" contenteditable="true" aria-checked="true">Ngabo</div>
+
+        <button type="submit">
+          <span class="loader"></span>
+          <span class="btn-word">ADD BROG</span>
+        </button>
       </form>
     </div>
     <script>
+      const loader = document.querySelector(".loader");
+      const btnWord = document.querySelector(".btn-word");
+      const token = JSON.parse(localStorage.getItem("token"));
+      const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
       async function addBlog(event) {
+        btnWord.style.display = "none";
+        loader.style.display = "block";
         event.preventDefault();
 
         let imageFile = document.querySelector("#imageFile").files[0];
         let title = document.querySelector("#title").value;
         let description = document.querySelector("#description").value;
+        let content = document.querySelector("#editor").innerHTML
 
         const blogData = new FormData();
         blogData.append("imageUrl", imageFile);
         blogData.append("title", title);
         blogData.append("description", description);
+        blogData.append("content", content)
 
         await fetch("http://localhost:4000/blog/addBlog", {
           method: "POST",
           headers: {
-            
+             "Authorization": `Bearer ${token}`,
+             "Refresh-token": `${refreshToken}`,
           },
           body: blogData,
         })
           .then((res) => res.json())
           .then((data) => {
-            var popup = document.getElementById("popup");
-            popup.textContent = "Blog Add Successfully";
-            popup.classList.add("show");
-            setTimeout(function () {
-              popup.classList.remove("show");
-              reloadFunc()
-            }, 3000);
-
+            if (data.blog) {
+              var popup = document.getElementById("popup");
+              popup.textContent = "Blog Add Successfully";
+              popup.classList.add("show");
+              btnWord.style.display = "block";
+              loader.style.display = "none";
+              setTimeout(function () {
+                popup.classList.remove("show");
+                reloadFunc();
+              }, 3000);
+            } else {
+              console.log(data);
+            }
           })
           .catch((error) => console.log(error.message));
       }
 
-      function reloadFunc(){
-        window.location.reload()
+      function reloadFunc() {
+        window.location.reload();
       }
     </script>
-   
   </body>
 </html>

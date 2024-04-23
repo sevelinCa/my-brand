@@ -11,11 +11,11 @@
   <body>
     <div class="container">
       <nav>
-        <a href="./">
+        <a href="./index.html">
           <h1 class="logo">MY_<span>BRAND</span></h1>
         </a>
         <ul id="navbar" class="links">
-          <li><a href="./">Home</a></li>
+          <li><a href="./index.html">Home</a></li>
           <li><a href="./contactus.html">Contact Us</a></li>
           <li><a href="./aboutus.html">About Us</a></li>
           <li><a href="./portfolio.html">Portfolio</a></li>
@@ -365,41 +365,7 @@
 
         <!-- insight / blogs -->
    
-
-        <!-- contact us -->
-        <!-- <div class="contact-us" id="getintouch">
-          <h1>Contact Us</h1>
-          <div class="contact-container">
-            <div class="contact-info">
-              <div class="info">
-                <span>Email</span>
-                <p>ngabosevelin@gmail.com</p>
-              </div>
-              <div class="info">
-                <span>Phone</span>
-                <p>+250792570064</p>
-              </div>
-              <div class="info">
-                <span>Business Hours</span>
-                <p>monday to sunday 7:00AM-9:00PM</p>
-              </div>
-            </div>
-            <div class="contact-form">
-              <form action="">
-                <input type="text" placeholder="Your Name" />
-                <input type="text" placeholder="Your Email" />
-                <textarea
-                  name=""
-                  placeholder="Your Message"
-                  id=""
-                  cols="30"
-                  rows="4"
-                ></textarea>
-                <button>Submit</button>
-              </form>
-            </div>
-          </div>
-        </div> -->
+        <div id="popup" class="popup"></div>
       </main>
     </div>
     <footer>
@@ -416,14 +382,15 @@
         </div>
         <div class="subscribe">
           <h3>SUBSCRIBE NOW</h3>
-          <form action="">
-            <input type="text" placeholder="Type Your Email" />
+          <form action="" id="subscribeForm">
+            <input type="text" id="subEmail" placeholder="Type Your Email" style="color: white;"/>
             <button>submit now</button>
           </form>
         </div>
       </div>
       <span class="copy">© 2024 My_Brand. All rights reserved.</span>
     </footer>
+ 
     <script src="./main.js"></script>
   </body>
 </html>

@@ -6,6 +6,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
+    <style>
+        body{
+          color: white;
+        }
+        #blogContent{
+          background-color: rgb(128, 128, 128);
+          padding: 10px;
+        }
+     
+    </style>
   </head>
   <body>
     <nav>
@@ -92,6 +102,7 @@
       <div class="img-content">
         <div class="image"></div>
         <div class="content"></div>
+        <div id="blogContent" style="color: blue;"></div>
         <div class="likes" style="position: relative;">
           <div
             class=""
@@ -182,11 +193,11 @@
     </div>
     <script>
   
-
+  const url = new URL(window.location.href);
+         const id = url.searchParams.get("id");
       const fetchSingleBlod = async()=>{
         const token = JSON.parse(localStorage.getItem("token"))
-         const url = new URL(window.location.href);
-         const id = url.searchParams.get("id");
+       
 
         
         console.log(id)
@@ -212,6 +223,7 @@
 
         const h1 = document.createElement("h1");
         const span = document.createElement("span");
+        
 
         // const blogsData = JSON.parse(localStorage.getItem("blogs")) || [];
         console.log()
@@ -221,8 +233,64 @@
         likesCount.innerText = blogsData.likes;
         content.appendChild(h1)
         content.appendChild(span);
+        document.getElementById('blogContent').innerHTML = blogsData.content ? blogsData.content : "";
       }
       window.onload= fetchSingleBlod()
+
+      async function fetchComment(){
+        await fetch(`http://localhost:4000/blog/selectComment/${id}`).then((res)=>{
+          if(!res.ok){
+            console.log("---->error")
+          }
+          return res.json()
+        }).then((data)=>{
+          console.log(data.comment)
+          displayComment(data)
+        }).catch((error)=>{
+          console.log(error)
+        })
+      }
+
+      function displayComment(dataFrom) {
+        const comment = document.querySelector(".comment");
+        const commentCount = document.querySelector(".commentCount");
+        let countComment = 0;
+        if(dataFrom.comment){
+           const commentData = dataFrom.comment
+
+       
+        for (let i = commentData.length - 1; i >= 0; i--) {
+         
+            const personComment = document.createElement("div");
+            personComment.classList.add("person-comment");
+            personComment.innerHTML = `
+             <div class="person-header">
+                  <div class="profile-name">
+                    <div class="profile"></div>
+                    <span class="">${commentData[i].name}</span>
+                  </div>
+                  <div class="timeBlock" style="display:flex;flex-direction:column; margin-left:auto">
+                    <span style="color:orange;font-weight:200">${new Date(commentData[i].createdAt).toLocaleDateString()}</span>
+                    <span style="color:orange;font-weight:200">${new Date(commentData[i].createdAt).toLocaleTimeString([], {hour:'2-digit', minute: '2-digit'})}</span>
+
+                    </div>
+                </div>
+                <div class="person-content">
+                  <span
+                    >${commentData[i].comment}</span
+                  >
+                </div>`;
+            comment.appendChild(personComment);
+            countComment++;
+          }
+        }else{
+          comment.innerHTML = dataFrom.message
+        }
+          
+      
+        
+      }
+      fetchComment()
      
     </script>
  

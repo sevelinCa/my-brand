@@ -1,6 +1,9 @@
 const modal = document.querySelector(".setting-modal");
 const profile = document.querySelector(".profile");
 const notification = document.querySelector(".notification-container");
+const loaderWave = document.querySelector(".loading-wave ")
+
+
 
 profile.addEventListener("click", () => {
   modal.classList.toggle("active");
@@ -42,7 +45,7 @@ window.addEventListener("click", (e) => {
 
 let idUp = null
 const token = JSON.parse(localStorage.getItem("token"))
-
+const refreshToken = JSON.parse(localStorage.getItem("refreshToken"))
 
 
 async function updateModal(id) {
@@ -88,7 +91,7 @@ async function updateBlog(data){
     const formData = new FormData()
     formData.append("imageUrl", imageUrl.files[0])
     formData.append("title", updateTitle.value)
-    formData.append("description", updateDes.title)
+    formData.append("description", updateDes.value)
 
     await fetch(`http://localhost:4000/blog/updateBlog/${data._id}`,{
       method: "PUT",
@@ -98,22 +101,17 @@ async function updateBlog(data){
       body: formData
     }).then((res)=>{
       if(!res.ok){
-        console.log("$$$$$$$---->error")
+        console.log("=====---->Error")
       }
       return res.json()
     }).then((data)=>{
-      console.log(data)
+        window.location.reload()
     }).catch((error)=>{
       console.log(error.message)
     })
   })
 
 } 
-
-
-
-
-
 
 
 function openNotifi() {
@@ -163,48 +161,45 @@ function addBlog(event) {
 }
 
 
-function deleteBlog(id){
-  let blogsData = JSON.parse(localStorage.getItem('blogs')) || []
-  let allComment = JSON.parse(localStorage.getItem('comments')) || []
-  for (let i = 0; i < blogsData.length; i++) {
-    const deletableBlog = blogsData.findIndex(blog => blog.id === id);
-    blogsData.splice(deletableBlog,1);
-   
-    localStorage.setItem('blogs', JSON.stringify(blogsData))
- 
-  }
-  let indexComment = allComment.findIndex(com => com.id === id);
-  let count =   1
-  for(let c = 0;c< allComment.length;c++){
-    if(allComment[c].id == id){
-      count = count +1
-   
-
+async function deleteBlog(id){
+  await fetch(`http://localhost:4000/blog/deleteBlog/${id}`,{
+    method: "DELETE",
+    headers:{
+      "Authorization": `Bearer ${token}`,
+      "Refresh-token": `${refreshToken}`
     }
-  
-    
-  }
-  
-    allComment.splice(indexComment,count)
-    localStorage.setItem('comments', JSON.stringify(allComment))
-
+  }).then((response)=>{
+    if(!response.ok){
+      console.log("---->error here")
+    }
+    return response.json()
+  }).then((data)=>{
+    window.location.reload()
+  }).catch((error)=>{
+    console.log(error.message)
+  })
 
 }
 const fetchBlog = async ()=>{
 
 
-  await fetch('http://localhost:4000/blog/selectBlog', {
-    headers: {
-      "Authorization": `Bearer ${token}`
-    }
-  }).then((response)=>{
+  await fetch('http://localhost:4000/blog/selectBlog').then((response)=>{
     if(!response.ok){
       console.log("-------> Error")
     }
+    const newAccessTokenHeader = response.headers?.get("Authorization");
+    if (newAccessTokenHeader) {
+      const newAccessToken = newAccessTokenHeader.split(' ')[1];
+      localStorage.setItem("token", JSON.stringify(newAccessToken));
+    }
     return response.json()
   }).then((data)=>{
-   
-    displayBlog(data.blog)
+    console.log(data)
+    if(data.message==="success"){
+
+      loaderWave.style.display = "none"
+      displayBlog(data.blog)
+    }
     
   
   }).catch((error)=>{
@@ -216,7 +211,6 @@ async function displayBlog(blogsData) {
   console.log(blogsData)
   
   const allInsight = document.querySelector(".all-articles-card");
-  // const blogsData = JSON.parse(localStorage.getItem("blogs")) || [];
  
 
   if (blogsData.length > 0) {
@@ -241,7 +235,7 @@ async function displayBlog(blogsData) {
                 </div>
               <div class='ope' style="position:relative">
               <div class="operation" >
-              <div onclick="likeBlog(${blogsData[i].id})"  class="like">
+              <div onclick="likeBlog('${blogsData[i]._id}')"  class="like">
               <div>
               <svg
               width="20"
@@ -256,7 +250,7 @@ async function displayBlog(blogsData) {
                     />
                     </svg>
                     </div>
-                    <span>${0}</span>
+                    <span>${blogsData[i].likes}</span>
                     </div>
                     <div class="like">
                     <div>
@@ -319,3 +313,6 @@ function openBlogd(id) {
   window.location.href = `./singleBlog.html?id=${id}`;
 }
 fetchBlog()
+
+
+
