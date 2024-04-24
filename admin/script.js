@@ -56,7 +56,7 @@ async function updateModal(id) {
 
 async function fetchSingleBlog(id){
   let data=null;
-  await fetch(`http://localhost:4000/blog/singleBlog/${id}`, {
+  await fetch(`https://mybrand-backend-1-8rxh.onrender.com/blog/singleBlog/${id}`, {
   
     headers:{
       "Authorization": `Bearer ${token}`
@@ -93,7 +93,7 @@ async function updateBlog(data){
     formData.append("title", updateTitle.value)
     formData.append("description", updateDes.value)
 
-    await fetch(`http://localhost:4000/blog/updateBlog/${data._id}`,{
+    await fetch(`https://mybrand-backend-1-8rxh.onrender.com/blog/updateBlog/${data._id}`,{
       method: "PUT",
       headers: {
         "Authorization": `Bearer ${token}`
@@ -162,7 +162,7 @@ function addBlog(event) {
 
 
 async function deleteBlog(id){
-  await fetch(`http://localhost:4000/blog/deleteBlog/${id}`,{
+  await fetch(`https://mybrand-backend-1-8rxh.onrender.com/blog/deleteBlog/${id}`,{
     method: "DELETE",
     headers:{
       "Authorization": `Bearer ${token}`,
@@ -183,7 +183,7 @@ async function deleteBlog(id){
 const fetchBlog = async ()=>{
 
 
-  await fetch('http://localhost:4000/blog/selectBlog').then((response)=>{
+  await fetch('https://mybrand-backend-1-8rxh.onrender.com/blog/selectBlog').then((response)=>{
     if(!response.ok){
       console.log("-------> Error")
     }

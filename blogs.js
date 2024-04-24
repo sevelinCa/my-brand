@@ -2,7 +2,7 @@ const insightsMain = document.querySelector(".insights-main");
 const loadingWave = document.querySelector(".loading-wave");
 async function fetchBlog() {
   
-  await fetch("http://localhost:4000/blog/selectBlog")
+  await fetch("https://mybrand-backend-1-8rxh.onrender.com/blog/selectBlog")
     .then((res) => {
       if (!res.ok) {
         console.log("------< error");
@@ -21,7 +21,7 @@ async function displayBlog(blogsData) {
   if (blogsData.length > 0) {
     for (let i = 0; i < blogsData.length; i++) {
       const comments = await fetch(
-        `http://localhost:4000/blog/selectComment/${blogsData[i]._id}`
+        `https://mybrand-backend-1-8rxh.onrender.com/blog/selectComment/${blogsData[i]._id}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -127,7 +127,7 @@ async function likeBlog(id) {
     action = "unlike";
     localStorage.setItem("likedBlog", JSON.stringify(likedBlog));
   }
-  await fetch(`http://localhost:4000/blog/addLike/${id}`, {
+  await fetch(`https://mybrand-backend-1-8rxh.onrender.com/blog/addLike/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
