@@ -54,6 +54,7 @@
        
         
         <div class="img-content">
+          <h1 class="title"></h1>
           <div class="image"></div>
           <div class="content">
             <div class="loading-wave" >
@@ -248,16 +249,17 @@
         const content = document.querySelector(".content");
         const likesCount = document.querySelector(".likesCount");
 
-        const h1 = document.createElement("h1");
+        document.querySelector(".title").innerText = blogsData.title;
+        document.querySelector(".title").style.color = "white";
+        document.querySelector(".title").style.padding = "20px 0px";
         const span = document.createElement("span");
 
-        h1.innerText = blogsData.title;
-        span.innerText = blogsData.description;
+      
+        span.innerText = blogsData.content ? "" :  blogsData.description;
         likesCount.innerText = blogsData.likes;
         image.innerHTML = `<img src='${blogsData.imageUrl}' />`;
-        document.querySelector('.wordClass').innerHTML = `${blogsData?.content}'`;
+        document.querySelector('.wordClass').innerHTML = ` ${blogsData.content ? blogsData?.content : ""}`;
         document.querySelector('.wordClass').style.color = "white"
-        content.appendChild(h1);
         content.appendChild(span);
       }
 

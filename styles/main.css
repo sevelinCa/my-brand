@@ -730,6 +730,9 @@ footer  .copy{
     border: none;
     color: white;
     width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .comment-content .person-comment{
     display: flex;
