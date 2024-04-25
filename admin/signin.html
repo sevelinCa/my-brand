@@ -40,6 +40,11 @@
               id="password"
               placeholder="Enter your email"
             />
+            <div class="" style="display: flex;flex-direction: row;gap: 4px;padding: 10px 10px;">
+              <input type="checkbox" class="hide-unhide" style="width: 10px;"/>
+              <span class="hide-word" style="font-size: 12px;">Show password</span>
+
+            </div>
           </div>
           <a href="#" class="forgot">forgot password?</a>
           <button type="submit" class="btn">
@@ -92,6 +97,19 @@
             errorMessage.innerHTML = "";
           }, 2000);
         }
+
+        const hidebtn = document.querySelector('.hide-unhide')
+        hidebtn.addEventListener('change', async()=>{
+
+          if(hidebtn.checked){
+            document.querySelector("#password").type = "text"
+            document.querySelector(".hide-word").innerHTML = "Hide password"
+  
+          }else{
+            document.querySelector(".hide-word").innerHTML = "Show password"
+            document.querySelector("#password").type = "password"
+          }
+        })
       </script>
     </div>
     <!-- <script src="./auth.js"></script> -->

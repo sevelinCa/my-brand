@@ -4,7 +4,8 @@ const usernameAB = userInfo.username;
 const ABR1 = usernameAB.split(" ")[0].slice(0, 1);
 const ABR2 = usernameAB.split(" ")[1]?.slice(0, 1);
 
-document.getElementById("navbar").innerHTML = `  <nav>
+document.getElementById("navbar").innerHTML = `  
+<nav>
 <div class="top-nav">
   <div class="left-nav">
     <a href="../index.html" class="logo">

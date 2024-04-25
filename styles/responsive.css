@@ -105,10 +105,14 @@
 @media screen and (max-width:768px) {
     .contact-us .contact-container{
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
     .contact-us{
         align-items: center;
+    }
+    .contact-us h1{
+        font-size: 24px;
+     
     }
     .contact-us .contact-info{
         width: 100%;

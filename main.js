@@ -1,5 +1,7 @@
 const navbar = document.getElementById('navbarphone');
 const toggle = document.getElementById('toggle');
+const loaderWave2 = document.querySelector(".loader");
+
 
 toggle.addEventListener('click', (e) => {
     navbar.classList.toggle('active');
@@ -48,13 +50,15 @@ prev.addEventListener('click',()=>{
 
 const subscribeForm = document.querySelector("#subscribeForm")
 subscribeForm.addEventListener("submit", async(e)=>{
+    (loaderWave2.style.display = "flex"),
+    (document.querySelector(".btn-word").style.display = "none");
     e.preventDefault()
     const subEmail = document.querySelector("#subEmail")
     const data = {
         email: subEmail.value
     }
 
-    await fetch("http://localhost:4000/auth/subscribe",{
+    await fetch("https://mybrand-backend-1-8rxh.onrender.com/auth/subscribe",{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -66,7 +70,8 @@ subscribeForm.addEventListener("submit", async(e)=>{
         }
         return res.json()
     }).then((data)=>{
-       
+        (loaderWave2.style.display = "none"),
+        (document.querySelector(".btn-word").style.display = "flex");
         var popup = document.getElementById("popup");
         popup.textContent = "subscribe added";
         popup.classList.add("show");

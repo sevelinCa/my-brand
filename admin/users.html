@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
+   
     <style>
 
       .users {
@@ -54,6 +55,13 @@
   <body>
     <div id="navbar"></div>
     <script src="navbar.js"></script>
+    <script>
+      const profile2 = document.querySelector(".profile");
+      const modal2 = document.querySelector(".setting-modal");
+      profile2.addEventListener("click", () => {
+        modal2.classList.toggle("active");
+      });
+    </script>
     <div style="padding: 20px 100px">
       <span style="color: white">All Admin</span><br /><br />
     </div>
@@ -66,7 +74,7 @@
       
 
       async function fetchUsers() {
-        await fetch("http://localhost:4000/auth/users", {
+        await fetch("https://mybrand-backend-1-8rxh.onrender.com/auth/users", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -125,5 +133,6 @@
       };
       fetchUsers();
     </script>
+     <script src="./script.js"></script>
   </body>
 </html>

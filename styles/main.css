@@ -391,12 +391,13 @@ a{
     display: flex;
     flex-direction: column;
     gap: 40px;
-    padding: 40px 0px;
+    padding: 10px 0px;
 
 }
 .contact-us h1{
-    font-size: 24px;
+    font-size: 42px;
     color: var(--whiteText);
+    text-align: center;
 }
 .contact-us .contact-container{
     display: flex;
@@ -435,9 +436,10 @@ a{
    color: var(--whiteText);
    background: none;
    border:none ;
-   border-bottom: 2px solid #d3d2d245;
+   border-bottom: 1px solid #d3d2d245;
    padding: 10px 20px;
    width: 60%;
+   border-left: 1px solid #d3d2d245;
 }
 .contact-us .contact-form form input:focus{
     outline: none;
@@ -446,7 +448,8 @@ a{
    color: var(--whiteText);
    background: none;
    border:none ;
-   border-bottom: 2px solid #d3d2d245;
+   border-bottom: 1px solid #d3d2d245;
+   border-left: 1px solid #d3d2d245;
    padding: 10px 20px;
    width: 60%;
 }
@@ -468,6 +471,7 @@ a{
     background-color: var(--mainColor);
     color: var(--whiteText);
     cursor: pointer;
+    font-size: 18px;
 }
 
 footer{

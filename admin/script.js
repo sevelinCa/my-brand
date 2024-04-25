@@ -79,6 +79,7 @@ async function fetchSingleBlog(id){
 
 
 async function updateBlog(data){
+  let content = document.querySelector("#editor").innerHTML
   const updateTitle = document.querySelector("#titleUp")
   const updateDes = document.querySelector("#discUp")
   const imageUrl = document.querySelector("#imageUp")
@@ -92,6 +93,7 @@ async function updateBlog(data){
     formData.append("imageUrl", imageUrl.files[0])
     formData.append("title", updateTitle.value)
     formData.append("description", updateDes.value)
+    formData.append("content", content)
 
     await fetch(`https://mybrand-backend-1-8rxh.onrender.com/blog/updateBlog/${data._id}`,{
       method: "PUT",
@@ -194,7 +196,6 @@ const fetchBlog = async ()=>{
     }
     return response.json()
   }).then((data)=>{
-    console.log(data)
     if(data.message==="success"){
 
       loaderWave.style.display = "none"
@@ -208,7 +209,7 @@ const fetchBlog = async ()=>{
 }
 
 async function displayBlog(blogsData) {
-  console.log(blogsData)
+
   
   const allInsight = document.querySelector(".all-articles-card");
  

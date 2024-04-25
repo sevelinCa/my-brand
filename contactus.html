@@ -51,7 +51,7 @@
 
       <main>
         <div class="contact-us">
-          <h1>Contact Us</h1>
+          <h1>Get in Touch With Us</h1>
           <div class="contact-container">
             <div class="contact-info">
               <div class="info">
@@ -114,9 +114,12 @@
         </div>
         <div class="subscribe">
           <h3>SUBSCRIBE NOW</h3>
-          <form id="subscribeForm">
-            <input type="text" id="subEmail" placeholder="Type Your Email" />
-            <button>submit now</button>
+          <form a" id="subscribeForm">
+            <input type="text" id="subEmail" placeholder="Type Your Email" style="color: white;"/>
+            <button>
+              <span class="loader"></span>
+                  <span class="btn-word">Submit</span>
+            </button>
           </form>
         </div>
       </div>
@@ -142,7 +145,7 @@
             message: message.value,
           };
 
-          await fetch("http://localhost:4000/message/sendMessage", {
+          await fetch("https://mybrand-backend-1-8rxh.onrender.com/message/sendMessage", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
