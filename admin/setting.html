@@ -66,10 +66,7 @@
               <span>Email</span>
               <input id="updateEmail" type="text" value="" />
             </div>
-            <div class="input-contain">
-              <span>Password</span>
-              <input type="password" id="updatePassword"  value="" />
-            </div>
+            
            
           </div>
 
@@ -191,12 +188,10 @@
       }
       const updateUsername = document.querySelector("#updateUsername");
       const updateEmail = document.querySelector("#updateEmail");
-      const updatePassword = document.querySelector("#updatePassword");
 
       const displayUser = (userInfo) => {
         updateUsername.value = userInfo.username;
         updateEmail.value = userInfo.email;
-        updatePassword.value = userInfo.password;
         profileEmail.innerHTML = userInfo.email;
         profileUsername.innerHTML = userInfo.username;
       };
@@ -204,11 +199,9 @@
 
       async function updateUser(e) {
         e.preventDefault();
-
         const updateData = {
           username: updateUsername.value,
-          email: updateEmail.value,
-          password: updatePassword.value
+          email: updateEmail.value
         };
         await fetch("https://mybrand-backend-1-8rxh.onrender.com/auth/updateProfile", {
           method: "PUT",
