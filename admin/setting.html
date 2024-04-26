@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/main.css" />
     <link rel="stylesheet" href="./styles/responsive.css" />
+    <link rel="stylesheet" href="./styles/loader.css" />
   </head>
   <body>
     <div id="navbar"></div>
@@ -75,7 +76,8 @@
             style="cursor: pointer"
             class="btn"
           >
-            Update Profile
+          <span class="loader"></span>
+          <span class="btn-word word-update">Create</span>
           </button>
         </form>
       </div>
@@ -105,13 +107,21 @@
                 placeholder="Type password"
               />
             </div>
-            <button type="" id="btnsubmit" class="btn">Create</button>
+            <button type="" id="btnsubmit" class="btn create"> 
+             
+              <span class="loader-create"></span>
+              <span class="btn-word">Create</span>
+            </button>
           </div>
         </form>
       </div>
     </div>
     <script>
       const tokenHere = JSON.parse(localStorage.getItem("token"));
+      const loader = document.querySelector(".loader");
+      const loaderCreate = document.querySelector(".loader-create");
+      const btnWord = document.querySelector(".btn-word");
+      const WordUpdate = document.querySelector(".word-update");
       const emailRegister = document.querySelector("#emailRegister");
       const username = document.querySelector("#usernameRegister");
       const passwordRegister = document.querySelector("#passwordRegister");
@@ -139,6 +149,8 @@
             email: emailRegister.value,
             password: passwordRegister.value,
           };
+          btnWord.style.display = "none";
+          loaderCreate.style.display = "block";
           await fetch("https://mybrand-backend-1-8rxh.onrender.com/auth/register", {
             headers: {
               "Content-type": "application/json",
@@ -149,6 +161,8 @@
             .then((response) => response.json())
             .then((data) => {
               if (data.user) {
+                btnWord.style.display = "block";
+                loaderCreate.style.display = "none";
                 var popup = document.getElementById("popup");
                 popup.textContent = "Admin Created";
                 popup.classList.add("show");
@@ -203,7 +217,10 @@
           username: updateUsername.value,
           email: updateEmail.value
         };
+        WordUpdate.style.display = "none";
+        loader.style.display = "block";
         await fetch("https://mybrand-backend-1-8rxh.onrender.com/auth/updateProfile", {
+          
           method: "PUT",
           headers: {
             "Content-type": "application/json",
@@ -219,6 +236,8 @@
           })
           .then((data) => {
             if ((data.message = "User aUpdated successfully")) {
+              WordUpdate.style.display = "block";
+              loader.style.display = "none";
               var popup = document.getElementById("popup");
                 popup.textContent = "Update Created";
                 popup.classList.add("show");
