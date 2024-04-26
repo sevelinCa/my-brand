@@ -50,15 +50,17 @@ prev.addEventListener('click',()=>{
 
 const subscribeForm = document.querySelector("#subscribeForm")
 subscribeForm.addEventListener("submit", async(e)=>{
-    (loaderWave2.style.display = "flex"),
-    (document.querySelector(".btn-word").style.display = "none");
+  
     e.preventDefault()
     const subEmail = document.querySelector("#subEmail")
+    
+    if(emailRegex.test(subEmail.value )){
+        (loaderWave2.style.display = "flex"),
+        (document.querySelector(".btn-word").style.display = "none");
     const data = {
         email: subEmail.value
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(emailRegex.test(subEmail.value )){
 
   
 
