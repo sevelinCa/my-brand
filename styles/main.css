@@ -27,7 +27,7 @@ html{
     width: 100%;
     min-height:100vh;
     background-color: var(--background);
-    padding: 20px 50px;
+    padding: 0px 50px;
 }
  nav{
     display: flex;
@@ -427,11 +427,15 @@ a{
 }
 .contact-us .contact-form{
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 .contact-us .contact-form form{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    
 }
 .contact-us .contact-form form input{
    color: var(--whiteText);

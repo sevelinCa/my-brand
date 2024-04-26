@@ -68,6 +68,7 @@
               </div>
             </div>
             <div class="contact-form">
+              <span class="errorMessage" style="color: orange;padding: 10px 0px;"></span>
               <form id="messageForm" action="">
                 <input
                   value=""
@@ -114,7 +115,7 @@
         </div>
         <div class="subscribe">
           <h3>SUBSCRIBE NOW</h3>
-          <form a" id="subscribeForm">
+          <form  id="subscribeForm">
             <input type="text" id="subEmail" placeholder="Type Your Email" style="color: white;"/>
             <button>
               <span class="loader"></span>
@@ -177,7 +178,11 @@
               console.log(error.message);
             });
         } else {
-          alert("All field are required");
+          document.querySelector('.errorMessage').innerHTML="All field  Are required"
+          setTimeout(()=>{
+            document.querySelector('.errorMessage').innerHTML=""
+
+          }, 3000)
         }
       });
     </script>
