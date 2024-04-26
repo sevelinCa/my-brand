@@ -79,7 +79,7 @@ subscribeForm.addEventListener("submit", async(e)=>{
         (loaderWave2.style.display = "none"),
         (document.querySelector(".btn-word").style.display = "flex");
         var popup = document.getElementById("popup");
-        popup.textContent = "subscribe added";
+        popup.textContent = "subscription added";
         popup.classList.add("show");
         subEmail.value = ""
         setTimeout(function () {

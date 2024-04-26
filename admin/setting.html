@@ -66,7 +66,11 @@
               <span>Email</span>
               <input id="updateEmail" type="text" value="" />
             </div>
-           <a href="" style="color:orange">Change Password</a>
+            <div class="input-contain">
+              <span>Password</span>
+              <input type="password" id="updatePassword"  value="" />
+            </div>
+           
           </div>
 
           <button
@@ -147,9 +151,14 @@
           })
             .then((response) => response.json())
             .then((data) => {
-              if(data.user) {
-                alert("admin created successfully")
-                window.location.reload()
+              if (data.user) {
+                var popup = document.getElementById("popup");
+                popup.textContent = "Admin Created";
+                popup.classList.add("show");
+                setTimeout(function () {
+                  popup.classList.remove("show");
+                  window.location.reload();
+                }, 3000);
               }
             })
             .catch((error) => {
@@ -163,46 +172,44 @@
       const isLogedIn = localStorage.getItem("isLoggedIn");
       const userData = JSON.parse(localStorage.getItem("users"));
 
-     async function fetchUserinfo (){
-      await fetch("http://localhost:4000/auth/profile",{
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${tokenHere}`
-        }
-      }).then((res)=>{
-        if(!res.ok){
-          console.log("------->error")
-        }
-        return res.json()
-      }).then((data)=>{
-     
-       displayUser(data.user)
-        
-      })
-     }
-     const updateUsername = document.querySelector("#updateUsername");
-        const updateEmail = document.querySelector("#updateEmail");
-        
+      async function fetchUserinfo() {
+        await fetch("http://localhost:4000/auth/profile", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${tokenHere}`,
+          },
+        })
+          .then((res) => {
+            if (!res.ok) {
+              console.log("------->error");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            displayUser(data.user);
+          });
+      }
+      const updateUsername = document.querySelector("#updateUsername");
+      const updateEmail = document.querySelector("#updateEmail");
+      const updatePassword = document.querySelector("#updatePassword");
 
-     const displayUser = (userInfo)=>{
-
-       updateUsername.value = userInfo.username;
-       updateEmail.value = userInfo.email;
-       profileEmail.innerHTML = userInfo.email;
-       profileUsername.innerHTML = userInfo.username;
-     }
-    fetchUserinfo()
-        
-    
+      const displayUser = (userInfo) => {
+        updateUsername.value = userInfo.username;
+        updateEmail.value = userInfo.email;
+        updatePassword.value = userInfo.password;
+        profileEmail.innerHTML = userInfo.email;
+        profileUsername.innerHTML = userInfo.username;
+      };
+      fetchUserinfo();
 
       async function updateUser(e) {
         e.preventDefault();
-     
 
         const updateData = {
           username: updateUsername.value,
           email: updateEmail.value,
-        }
+          password: updatePassword.value
+        };
         await fetch("http://localhost:4000/auth/updateProfile", {
           method: "PUT",
           headers: {
@@ -210,19 +217,27 @@
             Authorization: `Bearer ${tokenHere}`,
           },
           body: JSON.stringify(updateData),
-        }).then((res)=>{
-          if(!res.ok){
-            console.log("====>error")
-          }
-          return res.json()
-        }).then((data)=>{
-          if(data.message = "User aUpdated successfully"){
-            alert("update success fully")
-            window.location.reload()
-          }
-        }).catch((error)=>{
-          console.log(error)
-        });
+        })
+          .then((res) => {
+            if (!res.ok) {
+              console.log("====>error");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            if ((data.message = "User aUpdated successfully")) {
+              var popup = document.getElementById("popup");
+                popup.textContent = "Update Created";
+                popup.classList.add("show");
+                setTimeout(function () {
+                  popup.classList.remove("show");
+                  window.location.reload();
+                }, 3000);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     </script>
     <script src="./script.js"></script>
