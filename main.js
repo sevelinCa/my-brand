@@ -93,6 +93,9 @@ subscribeForm.addEventListener("submit", async(e)=>{
     })
 }else{
     subEmail.style.border = "1px solid red"
+    setTimeout(function () {
+        subEmail.style.border = "none"
+      }, 3000);
      
 }
 })
