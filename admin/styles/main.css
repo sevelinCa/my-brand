@@ -364,6 +364,7 @@ main .articles .artcles-head a{
 .main-signin .signin-header h1{
     font-size: 28px;
     color: var(--mainColor);
+    text-align: center;
 }
 .main-signin .signin-header span{
     color: var(--grayColor);
@@ -485,6 +486,10 @@ main .articles .artcles-head a{
     font-weight: 400;
     font-size: 20px;
 }
+#editor{
+    width: 100%;
+    background: var(--inputBack);
+}
 .new-form{
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
@@ -500,24 +505,26 @@ main .articles .artcles-head a{
     color: var(--whiteText);
 }
 .new-form .input-contain input{
-    padding: 10px;
+    padding: 20px;
     width: 100%;
-    background: transparent;
-    border: 1px  solid var(--subText);
+
+    background: var(--inputBack);
+    border: none;
     border-radius: 6px;
     color: white;
 }
 .new-form .input-contain textarea{
     padding: 10px;
     width: 100%;
-    background: transparent;
-    border: 1px  solid var(--subText);
+
+    background-color:var(--inputBack);
     border-radius: 6px;
     height: 14vh;
+    border: none;
     color: white;
 
 }
-.new-form button{
+.form button{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -527,6 +534,8 @@ main .articles .artcles-head a{
     background-color: var(--mainColor);
     color: var(--whiteText);
     cursor: pointer;
+    width: 200px;
+    margin: 0px auto;
 }
 .aritcles-head{
     display: flex;
@@ -540,7 +549,7 @@ main .articles .artcles-head a{
     display: flex;
     flex-direction: row;
     gap: 20px;
-    padding: 10px 200px;
+    padding: 10px 100px;
 }
 .single-container .img-content{
     display: flex;
@@ -588,11 +597,11 @@ main .articles .artcles-head a{
     flex-direction: column;
     gap: 10px;
     width: 30%;
-  
     background-color: var(--subBack);
     padding: 20px;
     overflow-y: scroll;
     height: 75vh;
+    position: fixed; right: 100px;
  
 }
 .headWord span{

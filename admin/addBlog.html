@@ -41,17 +41,20 @@
             border: none;
          }
          .field{
-            border: 1px solid lightblue;
-            padding: 10px;
+           
+            padding: 20px;
             border-radius: 6px;
-            max-width: 400px;
-            max-height: 40vh;
             overflow-y: scroll;
             color: white;
-            /* font-weight: 300; */
+            max-height: 30vh;
          }
          .field:focus{
             outline: none;
+         }
+         .form{
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
          }
     </style>
   </head>
@@ -71,8 +74,9 @@
       <form
         onsubmit="addBlog(event)"
         enctype="multipart/form-data"
-        class="new-form"
+        class="form"
       >
+      <div class="new-form">
         <div class="input-contain">
           <span>Image *</span>
           <input
@@ -88,19 +92,24 @@
         </div>
 
         <div class="input-contain">
-          <span>Description *</span>
+          <span>Description / Summary</span>
           <textarea
             type="text"
             id="description"
-            placeholder="type blog title"
+            placeholder="type blog Summary"
           ></textarea>
         </div>
+      </div>
+      <div class="input-contain">
+        <span style="padding-bottom: 10px;color: white;">Your Blog Content</span>
         <div class="field" id="editor" contenteditable="true" aria-checked="true"></div>
 
-        <button type="submit">
-          <span class="loader"></span>
-          <span class="btn-word">ADD BROG</span>
-        </button>
+      </div>
+
+      <button type="submit">
+        <span class="loader"></span>
+        <span class="btn-word">ADD BROG</span>
+      </button>
       </form>
     </div>
     <script>

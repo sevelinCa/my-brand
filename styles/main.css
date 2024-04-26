@@ -314,6 +314,7 @@ main{
     background: var(--cardColor);
     border-radius: 8px;
     gap: 10px;
+    margin: 0px auto;
 }
 .insight-card h2{
     font-size: 16px;
@@ -577,6 +578,7 @@ footer  .copy{
     font-weight: 300;
     font-size: 14px;
 }
+
 .main-signin form {
     display: flex;
     flex-direction: column;

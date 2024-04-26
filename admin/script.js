@@ -79,21 +79,24 @@ async function fetchSingleBlog(id){
 
 
 async function updateBlog(data){
-  let content = document.querySelector("#editor").innerHTML
+ 
   const updateTitle = document.querySelector("#titleUp")
   const updateDes = document.querySelector("#discUp")
   const imageUrl = document.querySelector("#imageUp")
   updateTitle.value = data.title
   updateDes.value = data.description
+  document.querySelector("#editor").innerHTML = data.content ? data.content : ""
+
 
   const updateForm = document.querySelector("#updateForm")
   updateForm.addEventListener("submit", async(e)=>{
     e.preventDefault();
+    const contents = document.querySelector("#editor").innerHTML
     const formData = new FormData()
     formData.append("imageUrl", imageUrl.files[0])
     formData.append("title", updateTitle.value)
     formData.append("description", updateDes.value)
-    formData.append("content", content)
+    formData.append("content", contents)
 
     await fetch(`https://mybrand-backend-1-8rxh.onrender.com/blog/updateBlog/${data._id}`,{
       method: "PUT",

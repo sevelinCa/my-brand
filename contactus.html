@@ -135,10 +135,11 @@
       const token = JSON.parse(localStorage.getItem("token"));
 
       messageForm.addEventListener("submit", async (e) => {
-        (loader.style.display = "flex"),
-          (document.querySelector(".btn-word").style.display = "none");
+       
         e.preventDefault();
-        if (username !== "" && useremail !== "" && message !== "") {
+        if (username.value !== "" && useremail.value !== "" && message.value !== "") {
+          (loader.style.display = "flex"),
+          (document.querySelector(".btn-word").style.display = "none");
           const messageData = {
             name: username.value,
             email: useremail.value,

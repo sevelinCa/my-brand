@@ -1,71 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="./styles/responsive.css">
-    <link rel="stylesheet" href="./styles/loader.css">
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/responsive.css" />
+    <link rel="stylesheet" href="./styles/loader.css" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <script src="navbar.js"></script>
 
-</head>
-<body>
-  <div id="navbar"></div>
-  <script src="navbar.js"></script>
-      
-      <div class="update-modal">
-        <div class="modal-form">
-          <h1>Update Aritcles</h1>
-          <form  id="updateForm" action="">
-            <div class="form">
-
-              <div class="contain">
-                <span>Image</span>
-                <input id="imageUp" type="file" placeholder="hello" >
-              </div>
-              <div class="contain">
-                <span>Title</span>
-                <input id="titleUp" type="text" placeholder="" >
-              </div>
-             
-
-              
+    <div class="update-modal">
+      <div class="modal-form">
+        <h1>Update Aritcles</h1>
+        <form id="updateForm" action="">
+          <div class="form">
+            <div class="contain">
+              <span>Image</span>
+              <input id="imageUp" type="file" placeholder="hello" />
             </div>
-            <div class="contain" style="width: 100%;">
-            <span>Description</span>
-            <textarea style="width: 100%;padding: 10px;border: 1px solid white;background-color: transparent; border-radius: 12px;color: white;"   name="" id="discUp"  rows="10"></textarea>
-            <div class="field" id="editor" style="max-height: 20vh;overflow: hidden;" contenteditable="true" aria-checked="true">
+            <div class="contain">
+              <span>Title</span>
+              <input id="titleUp" type="text" placeholder="" />
             </div>
           </div>
+          <div class="contain" style="width: 100%">
+            <span>Description</span>
+            <textarea
+              style="
+                width: 100%;
+                padding: 10px;
+                border: 1px solid white;
+                background-color: transparent;
+                border-radius: 12px;
+                color: white;
+              "
+              name=""
+              id="discUp"
+              rows="4"
+            ></textarea>
+            <div class="contain">
+              <span>Content</span>
+            
+            <div
+              class="field"
+              id="editor"
+              style="
+                max-height: 20vh;
+                overflow: hidden;
+                border-radius: 12px;
+                padding: 10px;
+              "
+              contenteditable="true"
+              aria-checked="true"
+            >
+              
+            </div>
+          </div>
+          </div>
           <button type="submit">Update</button>
-          </form>
-        </div>
+        </form>
       </div>
-       
-      <div class="all-aritcles">
-        <div class="aritcles-head">
+    </div>
 
-          <h1>Blogs</h1>
-          <a href="./addBlog.html" class="new-aritcle">New Blog</a>
-        </div>
-        <div class="all-articles-card">
-          
-
-       
-       
-        </div>
-        <div class="loading-wave" >
-          <div class="loading-bar"></div>
-          <div class="loading-bar"></div>
-          <div class="loading-bar"></div>
-          <div class="loading-bar"></div>
-        </div>
-        
+    <div class="all-aritcles">
+      <div class="aritcles-head">
+        <h1>Blogs</h1>
+        <a href="./addBlog.html" class="new-aritcle">New Blog</a>
       </div>
-      <h1 class="sorry" style="width: 800px;color: orange;"></h1>
-     
+      <div class="all-articles-card"></div>
+      <div class="loading-wave">
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+      </div>
+    </div>
+    <h1 class="sorry" style="width: 800px; color: orange"></h1>
 
-      <script src="./script.js"></script>
-    
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>

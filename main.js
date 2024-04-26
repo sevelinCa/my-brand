@@ -57,6 +57,10 @@ subscribeForm.addEventListener("submit", async(e)=>{
     const data = {
         email: subEmail.value
     }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(emailRegex.test(subEmail.value )){
+
+  
 
     await fetch("https://mybrand-backend-1-8rxh.onrender.com/auth/subscribe",{
         method: "POST",
@@ -85,7 +89,12 @@ subscribeForm.addEventListener("submit", async(e)=>{
     }).catch((error)=>{
         console.log(error)
     })
+}else{
+    subEmail.style.border = "1px solid red"
+     
+}
 })
+
 
 
 

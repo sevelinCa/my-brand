@@ -19,6 +19,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-align: center;
+    margin: 0px auto;
 }
 .main-about .about-me h1{
     color: var(--mainColor);
