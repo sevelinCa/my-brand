@@ -124,6 +124,15 @@
   visibility: visible;
   animation: fadeIn 0.5s ease forwards;
 }
+.users .singleUser {
+  background: #2B2835;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+ 
+  border-radius: 8px;
+}
 
 @keyframes fadeIn {
   from {
