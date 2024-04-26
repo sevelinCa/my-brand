@@ -173,7 +173,7 @@
       const userData = JSON.parse(localStorage.getItem("users"));
 
       async function fetchUserinfo() {
-        await fetch("http://localhost:4000/auth/profile", {
+        await fetch("https://mybrand-backend-1-8rxh.onrender.com/auth/profile", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${tokenHere}`,
@@ -210,7 +210,7 @@
           email: updateEmail.value,
           password: updatePassword.value
         };
-        await fetch("http://localhost:4000/auth/updateProfile", {
+        await fetch("https://mybrand-backend-1-8rxh.onrender.com/auth/updateProfile", {
           method: "PUT",
           headers: {
             "Content-type": "application/json",
