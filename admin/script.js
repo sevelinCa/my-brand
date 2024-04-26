@@ -2,6 +2,8 @@ const modal = document.querySelector(".setting-modal");
 const profile = document.querySelector(".profile");
 const notification = document.querySelector(".notification-container");
 const loaderWave = document.querySelector(".loading-wave ")
+const loader = document.querySelector(".loader ")
+const btnWord = document.querySelector(".btn-word ")
 
 
 
@@ -97,7 +99,8 @@ async function updateBlog(data){
     formData.append("title", updateTitle.value)
     formData.append("description", updateDes.value)
     formData.append("content", contents)
-
+    btnWord.style.display = "none";
+    loader.style.display = "block";
     await fetch(`https://mybrand-backend-1-8rxh.onrender.com/blog/updateBlog/${data._id}`,{
       method: "PUT",
       headers: {
@@ -110,6 +113,8 @@ async function updateBlog(data){
       }
       return res.json()
     }).then((data)=>{
+      btnWord.style.display = "block";
+      loader.style.display = "none";
         window.location.reload()
     }).catch((error)=>{
       console.log(error.message)
